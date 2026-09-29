@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://925film.pages.dev/peopleent/sitemap.xml
