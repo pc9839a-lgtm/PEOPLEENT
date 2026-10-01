@@ -22,15 +22,66 @@ header{height:66px;border-bottom:1px solid var(--line);display:flex;align-items:
 .cta{background:var(--dark);color:white;padding:64px 0}.cta h2{font-size:clamp(30px,4.5vw,46px);letter-spacing:-.045em;margin:0 0 18px}.cta p{color:#aaa7a1;line-height:1.8;margin:0;max-width:660px}.btns{display:flex;gap:10px;flex-wrap:wrap;margin-top:28px}.btn{padding:13px 17px;border:1px solid #383838;font-weight:800;font-size:14px}.primary{background:var(--accent);border-color:var(--accent);color:#111}
 footer{padding:28px 0;background:var(--dark);color:#777;font-size:12px;border-top:1px solid #222}
 @media(max-width:640px){.wrap,.header-inner{width:calc(100% - 28px)}.hero{padding:62px 0 38px}.dek{font-size:17px}.article section{padding:38px 0}.article p{font-size:16px;line-height:1.9}.takeaway{padding:24px 22px}}
+
+/* PEOPLEENT global inquiry CTA */
+body{padding-bottom:76px}
+.pe-inline-cta{
+  width:min(920px,calc(100% - 40px));margin:22px auto 46px;padding:26px 28px;
+  background:#111;color:#fff;border:1px solid #272727;
+  display:flex;align-items:center;justify-content:space-between;gap:24px
+}
+.pe-inline-cta div{min-width:0}
+.pe-inline-cta b{display:block;font-size:19px;line-height:1.35;letter-spacing:-.025em;margin-bottom:7px}
+.pe-inline-cta span{display:block;color:#aaa7a1;font-size:14px;line-height:1.65}
+.pe-inline-cta a{
+  flex:0 0 auto;display:inline-flex;align-items:center;justify-content:center;
+  min-height:46px;padding:0 18px;background:#ff6a21;color:#111!important;
+  font-size:14px;font-weight:900;text-decoration:none!important
+}
+.pe-sticky-cta{
+  position:fixed;left:50%;bottom:14px;transform:translateX(-50%);
+  z-index:9999;width:min(760px,calc(100% - 28px));min-height:56px;
+  background:#111;color:#fff;border:1px solid #333;
+  box-shadow:0 14px 38px rgba(0,0,0,.28);
+  display:flex;align-items:center;justify-content:space-between;gap:16px;
+  padding:9px 10px 9px 18px
+}
+.pe-sticky-cta .pe-sticky-copy{min-width:0}
+.pe-sticky-cta strong{display:block;font-size:15px;line-height:1.25;letter-spacing:-.02em}
+.pe-sticky-cta small{display:block;margin-top:3px;color:#999;font-size:11px;line-height:1.3}
+.pe-sticky-cta a{
+  flex:0 0 auto;display:inline-flex;align-items:center;justify-content:center;
+  min-height:38px;padding:0 15px;background:#ff6a21;color:#111!important;
+  font-size:13px;font-weight:900;text-decoration:none!important
+}
+@media(max-width:640px){
+  body{padding-bottom:70px}
+  .pe-inline-cta{width:calc(100% - 28px);margin:10px auto 36px;padding:22px;display:block}
+  .pe-inline-cta b{font-size:18px}
+  .pe-inline-cta a{margin-top:16px;width:100%}
+  .pe-sticky-cta{bottom:8px;width:calc(100% - 16px);min-height:54px;padding:8px 8px 8px 14px}
+  .pe-sticky-cta strong{font-size:13px}
+  .pe-sticky-cta small{display:none}
+  .pe-sticky-cta a{min-height:38px;padding:0 13px;font-size:12px}
+}
 </style></head>
 <body>
 <header><div class="header-inner"><a class="logo" href="/">PEOPLEENT</a><a class="back" href="/insight/">INSIGHT</a></div></header>
 <main>
 <article>
 <div class="wrap hero"><div class="eyebrow">라이브 송출</div><h1>유튜브 라이브 송출 비용, 카메라 몇 대냐고 묻기 전에 볼 것</h1><p class="dek">라이브 송출 견적을 알아보면 한쪽은 수십만 원대, 다른 쪽은 수백만 원대로 나오는 경우가 있습니다. 카메라 대수 차이도 있지만, 실제로는 ‘현장에서 어디까지 만들어서 내보내느냐’가 비용을 더 크게 바꿉니다.</p><div class="meta"><span>PEOPLEENT</span><span>2026.10.01</span><span>5분 읽기</span></div></div>
-<div class="wrap article"><section><h2>1카메라 송출과 행사 중계는 다른 일에 가깝습니다</h2><p>고정 카메라 한 대로 강연자를 찍어 그대로 유튜브에 보내는 방식은 비교적 단순합니다. 반면 컨퍼런스처럼 발표자 화면, PPT, 영상, 자막, 객석 화면을 계속 바꿔야 하면 스위칭과 오퍼레이팅이 필요합니다.</p><p>같은 두 시간 송출이라도 단순 촬영인지, 여러 소스를 실시간으로 구성하는 행사 중계인지에 따라 필요한 사람과 장비가 달라집니다.</p></section><section><h2>카메라보다 먼저 ‘무엇을 화면에 띄울지’ 정하세요</h2><p>발표자 얼굴만 보여주면 되는지, PPT를 크게 보여줘야 하는지, 발표자와 PPT를 한 화면에 같이 넣을지, 하단 자막이나 행사 로고가 필요한지부터 정하는 게 좋습니다.</p><p>이걸 먼저 정하면 카메라 대수와 스위처, 자막 장비, 운영 인력도 자연스럽게 결정됩니다.</p></section><section><h2>현장 음향을 그대로 가져올 수 있는지도 중요합니다</h2><p>온라인 시청자는 현장 스피커 소리를 듣는 게 아니라 믹서에서 전달되는 오디오를 듣습니다. 발표자 마이크, 영상 재생 소리, 질의응답 마이크가 모두 송출로 정상 전달되는지 사전에 확인해야 합니다.</p><p>화면은 잘 나오는데 소리가 작거나 찢어지면 라이브 품질은 바로 떨어집니다. 송출팀과 현장 음향팀의 연결 방식이 중요한 이유입니다.</p></section><section><h2>인터넷은 ‘와이파이 됩니다’만 믿으면 위험합니다</h2><p>행사장 와이파이는 참석자들이 동시에 사용하면 상태가 달라질 수 있습니다. 가능하면 유선 회선과 실제 업로드 속도를 확인하고, 중요한 행사라면 장애가 생겼을 때 사용할 보조 회선도 고려하는 편이 좋습니다.</p><p>송출이 끊기면 다시 처음부터 할 수 없는 행사일수록 네트워크 확인에 시간을 써야 합니다.</p></section><section><h2>녹화본이 필요한지도 견적 전에 정하세요</h2><p>유튜브에 남는 다시보기만 있으면 되는지, 깨끗한 원본 녹화가 필요한지, 발표자별 편집본까지 필요한지에 따라 후반 작업이 달라집니다.</p><p>행사 종료 후 교육자료나 홍보 영상으로 쓸 계획이 있다면 라이브용 화면과 별도로 어떤 원본을 남길지 미리 정해두는 것이 좋습니다.</p></section><div class="takeaway"><b>정리하면</b><br>라이브 송출 견적은 카메라 대수보다 화면 구성, 음향, 네트워크, 운영 인력, 녹화 범위를 먼저 맞춰야 제대로 비교할 수 있습니다.</div></div>
+<div class="wrap article"><section><h2>1카메라 송출과 행사 중계는 다른 일에 가깝습니다</h2><p>고정 카메라 한 대로 강연자를 찍어 그대로 유튜브에 보내는 방식은 비교적 단순합니다. 반면 컨퍼런스처럼 발표자 화면, PPT, 영상, 자막, 객석 화면을 계속 바꿔야 하면 스위칭과 오퍼레이팅이 필요합니다.</p><p>같은 두 시간 송출이라도 단순 촬영인지, 여러 소스를 실시간으로 구성하는 행사 중계인지에 따라 필요한 사람과 장비가 달라집니다.</p></section><section><h2>카메라보다 먼저 ‘무엇을 화면에 띄울지’ 정하세요</h2><p>발표자 얼굴만 보여주면 되는지, PPT를 크게 보여줘야 하는지, 발표자와 PPT를 한 화면에 같이 넣을지, 하단 자막이나 행사 로고가 필요한지부터 정하는 게 좋습니다.</p><p>이걸 먼저 정하면 카메라 대수와 스위처, 자막 장비, 운영 인력도 자연스럽게 결정됩니다.</p></section>
+<div class="pe-inline-cta" aria-label="PEOPLEENT 행사 문의">
+  <div><b>행사 준비 중이신가요?</b><span>일정 · 장소 · 예상 인원만 있어도 필요한 운영 범위부터 같이 정리할 수 있습니다.</span></div>
+  <a href="https://peopleent.com/contact" target="_blank" rel="noopener">행사 문의하기 →</a>
+</div>
+<section><h2>현장 음향을 그대로 가져올 수 있는지도 중요합니다</h2><p>온라인 시청자는 현장 스피커 소리를 듣는 게 아니라 믹서에서 전달되는 오디오를 듣습니다. 발표자 마이크, 영상 재생 소리, 질의응답 마이크가 모두 송출로 정상 전달되는지 사전에 확인해야 합니다.</p><p>화면은 잘 나오는데 소리가 작거나 찢어지면 라이브 품질은 바로 떨어집니다. 송출팀과 현장 음향팀의 연결 방식이 중요한 이유입니다.</p></section><section><h2>인터넷은 ‘와이파이 됩니다’만 믿으면 위험합니다</h2><p>행사장 와이파이는 참석자들이 동시에 사용하면 상태가 달라질 수 있습니다. 가능하면 유선 회선과 실제 업로드 속도를 확인하고, 중요한 행사라면 장애가 생겼을 때 사용할 보조 회선도 고려하는 편이 좋습니다.</p><p>송출이 끊기면 다시 처음부터 할 수 없는 행사일수록 네트워크 확인에 시간을 써야 합니다.</p></section><section><h2>녹화본이 필요한지도 견적 전에 정하세요</h2><p>유튜브에 남는 다시보기만 있으면 되는지, 깨끗한 원본 녹화가 필요한지, 발표자별 편집본까지 필요한지에 따라 후반 작업이 달라집니다.</p><p>행사 종료 후 교육자료나 홍보 영상으로 쓸 계획이 있다면 라이브용 화면과 별도로 어떤 원본을 남길지 미리 정해두는 것이 좋습니다.</p></section><div class="takeaway"><b>정리하면</b><br>라이브 송출 견적은 카메라 대수보다 화면 구성, 음향, 네트워크, 운영 인력, 녹화 범위를 먼저 맞춰야 제대로 비교할 수 있습니다.</div></div>
 <div class="wrap related"><h3>같이 보면 좋은 글</h3><div class="related-grid"><a href="/insight/event-agency-cost/"><span>기업행사 대행 비용, 견적서가 업체마다 다른 이유</span><span>→</span></a><a href="/insight/event-agency-checklist/"><span>행사대행업체 고를 때 포트폴리오보다 먼저 볼 7가지</span><span>→</span></a><a href="/insight/public-event-practical-guide/"><span>공공기관 행사 대행, 견적보다 먼저 확인해야 할 실무 항목</span><span>→</span></a></div></div>
 </article>
 <section class="cta"><div class="wrap"><h2>행사 조건이 정해져 있다면<br>필요한 범위부터 정리해보세요.</h2><p>일정, 장소, 예상 인원과 행사 형식을 알려주시면 준비 항목과 운영 범위를 확인할 수 있습니다.</p><div class="btns"><a class="btn primary" href="https://peopleent.com/contact" target="_blank" rel="noopener">행사 문의</a><a class="btn" href="/live-streaming/">관련 서비스 보기</a></div></div></section>
 </main><footer><div class="wrap">PEOPLEENT · EVENT PRODUCTION & OPERATION</div></footer>
+<div class="pe-sticky-cta" aria-label="PEOPLEENT 빠른 문의">
+  <div class="pe-sticky-copy"><strong>행사 견적이 필요하신가요?</strong><small>일정 · 장소 · 인원만 알려주셔도 됩니다.</small></div>
+  <a href="https://peopleent.com/contact" target="_blank" rel="noopener">문의하기 →</a>
+</div>
 </body></html>
