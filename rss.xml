@@ -1,52 +1,52 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0">
   <channel>
-    <title>PEOPLEENT</title>
-    <link>https://peopleent.pagero.kr/</link>
-    <description>기업행사 대행, 컨퍼런스·세미나 운영, 라이브 송출, 촬영·디자인·인쇄까지 PEOPLEENT 행사 운영 서비스</description>
+    <title>PEOPLEENT 행사 운영 인사이트</title>
+    <link>https://peopleent.pagero.kr/insight/</link>
+    <description>기업행사 대행 비용, 업체 선정, 공공기관 행사, 컨퍼런스, 라이브 송출, 학회 PCO 등 행사 실무 정보</description>
     <language>ko-KR</language>
-    <lastBuildDate>Thu, 01 Oct 2026 05:40:00 GMT</lastBuildDate>
+    <lastBuildDate>Thu, 01 Oct 2026 06:00:00 GMT</lastBuildDate>
     <item>
-      <title>기업행사 대행 | PEOPLEENT</title>
-      <link>https://peopleent.pagero.kr/corporate-event/</link>
-      <guid isPermaLink="true">https://peopleent.pagero.kr/corporate-event/</guid>
-      <pubDate>Thu, 01 Oct 2026 05:40:00 GMT</pubDate>
-      <description>기업행사 기획, 현장 운영, 음향·영상, 발표자료, 촬영과 제작물까지 행사 운영 범위를 정리했습니다.</description>
+      <title>기업행사 대행 비용, 견적서가 업체마다 다른 이유</title>
+      <link>https://peopleent.pagero.kr/insight/event-agency-cost/</link>
+      <guid isPermaLink="true">https://peopleent.pagero.kr/insight/event-agency-cost/</guid>
+      <pubDate>Thu, 01 Oct 2026 06:00:00 GMT</pubDate>
+      <description>기업행사 대행 견적을 기획·운영, 현장 인력, 장비, 제작물, 촬영·송출 항목으로 나눠 비교하는 방법을 정리했습니다.</description>
     </item>
     <item>
-      <title>공공기관 행사 대행 | PEOPLEENT</title>
-      <link>https://peopleent.pagero.kr/public-event/</link>
-      <guid isPermaLink="true">https://peopleent.pagero.kr/public-event/</guid>
-      <pubDate>Thu, 01 Oct 2026 05:40:00 GMT</pubDate>
-      <description>포럼, 성과보고회, 기념행사, 설명회 등 공공기관 행사 운영 범위와 체크포인트를 정리했습니다.</description>
+      <title>행사대행업체 고를 때 포트폴리오보다 먼저 볼 7가지</title>
+      <link>https://peopleent.pagero.kr/insight/event-agency-checklist/</link>
+      <guid isPermaLink="true">https://peopleent.pagero.kr/insight/event-agency-checklist/</guid>
+      <pubDate>Thu, 01 Oct 2026 06:00:00 GMT</pubDate>
+      <description>행사대행업체를 비교할 때 담당자, 견적 범위, 리허설, 비상 대응과 사후 결과물까지 확인할 항목을 정리했습니다.</description>
     </item>
     <item>
-      <title>컨퍼런스 운영 대행 | PEOPLEENT</title>
-      <link>https://peopleent.pagero.kr/conference/</link>
-      <guid isPermaLink="true">https://peopleent.pagero.kr/conference/</guid>
-      <pubDate>Thu, 01 Oct 2026 05:40:00 GMT</pubDate>
-      <description>등록, 세션 운영, 발표자·발표자료 관리, 무대·송출과 촬영까지 컨퍼런스 운영 흐름을 정리했습니다.</description>
+      <title>공공기관 행사 대행, 견적보다 먼저 확인해야 할 실무 항목</title>
+      <link>https://peopleent.pagero.kr/insight/public-event-practical-guide/</link>
+      <guid isPermaLink="true">https://peopleent.pagero.kr/insight/public-event-practical-guide/</guid>
+      <pubDate>Thu, 01 Oct 2026 06:00:00 GMT</pubDate>
+      <description>공공기관 행사에서 과업 범위, 조달 조건, 의전, 결과보고와 정산을 어떤 순서로 확인해야 하는지 정리했습니다.</description>
     </item>
     <item>
-      <title>세미나 운영 대행 | PEOPLEENT</title>
-      <link>https://peopleent.pagero.kr/seminar/</link>
-      <guid isPermaLink="true">https://peopleent.pagero.kr/seminar/</guid>
-      <pubDate>Thu, 01 Oct 2026 05:40:00 GMT</pubDate>
-      <description>기업·병원·교육 세미나의 등록, 발표자 관리, 질의응답, 촬영·녹화와 송출 운영 정보를 정리했습니다.</description>
+      <title>유튜브 라이브 송출 비용, 카메라 대수보다 먼저 확인할 것</title>
+      <link>https://peopleent.pagero.kr/insight/live-streaming-cost/</link>
+      <guid isPermaLink="true">https://peopleent.pagero.kr/insight/live-streaming-cost/</guid>
+      <pubDate>Thu, 01 Oct 2026 06:00:00 GMT</pubDate>
+      <description>라이브 송출 비용을 좌우하는 화면 구성, 음향, 네트워크, 녹화와 운영 범위를 정리했습니다.</description>
     </item>
     <item>
-      <title>행사 라이브 송출 | PEOPLEENT</title>
-      <link>https://peopleent.pagero.kr/live-streaming/</link>
-      <guid isPermaLink="true">https://peopleent.pagero.kr/live-streaming/</guid>
-      <pubDate>Thu, 01 Oct 2026 05:40:00 GMT</pubDate>
-      <description>YouTube Live, Zoom Webinar, 화면·자료 전환, 음향, 카메라, 녹화까지 라이브 송출 운영 정보를 정리했습니다.</description>
+      <title>학회·심포지엄 PCO, 일반 행사대행과 무엇이 다를까요?</title>
+      <link>https://peopleent.pagero.kr/insight/pco-vs-event-agency/</link>
+      <guid isPermaLink="true">https://peopleent.pagero.kr/insight/pco-vs-event-agency/</guid>
+      <pubDate>Thu, 01 Oct 2026 06:00:00 GMT</pubDate>
+      <description>학회와 심포지엄에서 PCO가 맡는 사무국, 등록, 연자·좌장, 전시·후원, 정산 업무를 정리했습니다.</description>
     </item>
     <item>
-      <title>학회·심포지엄 운영 | PEOPLEENT</title>
-      <link>https://peopleent.pagero.kr/academic-event/</link>
-      <guid isPermaLink="true">https://peopleent.pagero.kr/academic-event/</guid>
-      <pubDate>Thu, 01 Oct 2026 05:40:00 GMT</pubDate>
-      <description>학회·심포지엄의 등록, 좌장·연자, 세션·발표자료, 송출과 기록 운영 정보를 정리했습니다.</description>
+      <title>컨퍼런스 운영 체크리스트, 행사 전날까지 꼭 확인할 것</title>
+      <link>https://peopleent.pagero.kr/insight/conference-operation-checklist/</link>
+      <guid isPermaLink="true">https://peopleent.pagero.kr/insight/conference-operation-checklist/</guid>
+      <pubDate>Thu, 01 Oct 2026 06:00:00 GMT</pubDate>
+      <description>등록, 발표자료, Q&A, 음향, 리허설과 현장 의사결정까지 컨퍼런스 전날 확인할 항목을 정리했습니다.</description>
     </item>
   </channel>
 </rss>
