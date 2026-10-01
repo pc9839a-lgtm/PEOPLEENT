@@ -5,13 +5,48 @@
     <link>https://peopleent.pagero.kr/</link>
     <description>기업행사 대행, 컨퍼런스·세미나 운영, 라이브 송출, 촬영·디자인·인쇄까지 PEOPLEENT 행사 운영 서비스</description>
     <language>ko-KR</language>
-    <lastBuildDate>Tue, 29 Sep 2026 02:37:00 GMT</lastBuildDate>
+    <lastBuildDate>Thu, 01 Oct 2026 05:40:00 GMT</lastBuildDate>
     <item>
-      <title>PEOPLEENT 기업행사 운영대행</title>
-      <link>https://peopleent.pagero.kr/</link>
-      <guid isPermaLink="true">https://peopleent.pagero.kr/</guid>
-      <pubDate>Tue, 29 Sep 2026 02:37:00 GMT</pubDate>
-      <description>기업행사·공공기관 행사·컨퍼런스·세미나 운영대행. 행사 기획, 현장 운영, 발표자료, 음향·영상, YouTube·Zoom 라이브 송출, 촬영·녹화, 디자인·인쇄물 제작까지 지원합니다.</description>
+      <title>기업행사 대행 | PEOPLEENT</title>
+      <link>https://peopleent.pagero.kr/corporate-event/</link>
+      <guid isPermaLink="true">https://peopleent.pagero.kr/corporate-event/</guid>
+      <pubDate>Thu, 01 Oct 2026 05:40:00 GMT</pubDate>
+      <description>기업행사 기획, 현장 운영, 음향·영상, 발표자료, 촬영과 제작물까지 행사 운영 범위를 정리했습니다.</description>
+    </item>
+    <item>
+      <title>공공기관 행사 대행 | PEOPLEENT</title>
+      <link>https://peopleent.pagero.kr/public-event/</link>
+      <guid isPermaLink="true">https://peopleent.pagero.kr/public-event/</guid>
+      <pubDate>Thu, 01 Oct 2026 05:40:00 GMT</pubDate>
+      <description>포럼, 성과보고회, 기념행사, 설명회 등 공공기관 행사 운영 범위와 체크포인트를 정리했습니다.</description>
+    </item>
+    <item>
+      <title>컨퍼런스 운영 대행 | PEOPLEENT</title>
+      <link>https://peopleent.pagero.kr/conference/</link>
+      <guid isPermaLink="true">https://peopleent.pagero.kr/conference/</guid>
+      <pubDate>Thu, 01 Oct 2026 05:40:00 GMT</pubDate>
+      <description>등록, 세션 운영, 발표자·발표자료 관리, 무대·송출과 촬영까지 컨퍼런스 운영 흐름을 정리했습니다.</description>
+    </item>
+    <item>
+      <title>세미나 운영 대행 | PEOPLEENT</title>
+      <link>https://peopleent.pagero.kr/seminar/</link>
+      <guid isPermaLink="true">https://peopleent.pagero.kr/seminar/</guid>
+      <pubDate>Thu, 01 Oct 2026 05:40:00 GMT</pubDate>
+      <description>기업·병원·교육 세미나의 등록, 발표자 관리, 질의응답, 촬영·녹화와 송출 운영 정보를 정리했습니다.</description>
+    </item>
+    <item>
+      <title>행사 라이브 송출 | PEOPLEENT</title>
+      <link>https://peopleent.pagero.kr/live-streaming/</link>
+      <guid isPermaLink="true">https://peopleent.pagero.kr/live-streaming/</guid>
+      <pubDate>Thu, 01 Oct 2026 05:40:00 GMT</pubDate>
+      <description>YouTube Live, Zoom Webinar, 화면·자료 전환, 음향, 카메라, 녹화까지 라이브 송출 운영 정보를 정리했습니다.</description>
+    </item>
+    <item>
+      <title>학회·심포지엄 운영 | PEOPLEENT</title>
+      <link>https://peopleent.pagero.kr/academic-event/</link>
+      <guid isPermaLink="true">https://peopleent.pagero.kr/academic-event/</guid>
+      <pubDate>Thu, 01 Oct 2026 05:40:00 GMT</pubDate>
+      <description>학회·심포지엄의 등록, 좌장·연자, 세션·발표자료, 송출과 기록 운영 정보를 정리했습니다.</description>
     </item>
   </channel>
 </rss>
