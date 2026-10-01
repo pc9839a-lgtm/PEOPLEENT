@@ -33,6 +33,48 @@ section{padding:84px 0;border-bottom:1px solid var(--line)}.eyebrow{font-size:11
 .cta{background:var(--bg);color:white;padding:88px 0}.cta h2{font-size:clamp(38px,5vw,66px);letter-spacing:-.055em;margin:0 0 24px}.cta p{color:#aeadA7;line-height:1.7}.btns{display:flex;gap:10px;flex-wrap:wrap;margin-top:30px}.btn{display:inline-flex;padding:14px 18px;border:1px solid #3a3a37;font-weight:800}.btn.primary{background:var(--orange);border-color:var(--orange);color:#111}
 footer{background:var(--bg);color:#888;padding:28px 0 40px;font-size:12px}.footlinks{display:flex;flex-wrap:wrap;gap:14px;margin-top:12px}
 @media(max-width:760px){.wrap{width:min(100% - 28px,1120px)}.head{height:58px}.head nav{display:none}.hero{padding:82px 0 70px}.hero p{font-size:17px}.grid4,.checks,.related{grid-template-columns:1fr}section{padding:64px 0}.card{min-height:0;padding:22px}.flow div{grid-template-columns:52px 1fr}.cta{padding:70px 0}}
+
+/* PEOPLEENT global inquiry CTA */
+body{padding-bottom:76px}
+.pe-inline-cta{
+  width:min(920px,calc(100% - 40px));margin:22px auto 46px;padding:26px 28px;
+  background:#111;color:#fff;border:1px solid #272727;
+  display:flex;align-items:center;justify-content:space-between;gap:24px
+}
+.pe-inline-cta div{min-width:0}
+.pe-inline-cta b{display:block;font-size:19px;line-height:1.35;letter-spacing:-.025em;margin-bottom:7px}
+.pe-inline-cta span{display:block;color:#aaa7a1;font-size:14px;line-height:1.65}
+.pe-inline-cta a{
+  flex:0 0 auto;display:inline-flex;align-items:center;justify-content:center;
+  min-height:46px;padding:0 18px;background:#ff6a21;color:#111!important;
+  font-size:14px;font-weight:900;text-decoration:none!important
+}
+.pe-sticky-cta{
+  position:fixed;left:50%;bottom:14px;transform:translateX(-50%);
+  z-index:9999;width:min(760px,calc(100% - 28px));min-height:56px;
+  background:#111;color:#fff;border:1px solid #333;
+  box-shadow:0 14px 38px rgba(0,0,0,.28);
+  display:flex;align-items:center;justify-content:space-between;gap:16px;
+  padding:9px 10px 9px 18px
+}
+.pe-sticky-cta .pe-sticky-copy{min-width:0}
+.pe-sticky-cta strong{display:block;font-size:15px;line-height:1.25;letter-spacing:-.02em}
+.pe-sticky-cta small{display:block;margin-top:3px;color:#999;font-size:11px;line-height:1.3}
+.pe-sticky-cta a{
+  flex:0 0 auto;display:inline-flex;align-items:center;justify-content:center;
+  min-height:38px;padding:0 15px;background:#ff6a21;color:#111!important;
+  font-size:13px;font-weight:900;text-decoration:none!important
+}
+@media(max-width:640px){
+  body{padding-bottom:70px}
+  .pe-inline-cta{width:calc(100% - 28px);margin:10px auto 36px;padding:22px;display:block}
+  .pe-inline-cta b{font-size:18px}
+  .pe-inline-cta a{margin-top:16px;width:100%}
+  .pe-sticky-cta{bottom:8px;width:calc(100% - 16px);min-height:54px;padding:8px 8px 8px 14px}
+  .pe-sticky-cta strong{font-size:13px}
+  .pe-sticky-cta small{display:none}
+  .pe-sticky-cta a{min-height:38px;padding:0 13px;font-size:12px}
+}
 </style>
 </head>
 <body>
@@ -40,6 +82,11 @@ footer{background:var(--bg);color:#888;padding:28px 0 40px;font-size:12px}.footl
 <main>
 <section class="hero"><div class="wrap"><div class="kicker">ACADEMIC EVENT</div><h1>학회·심포지엄 운영</h1><p>학술행사는 좌장·연자·세션 시간과 발표자료 관리가 핵심입니다. 세션별 흐름을 기준으로 등록, 발표자 응대, 자료 전환, 질의응답과 기록을 정리합니다.</p><div class="chips"><span class="chip">학술대회</span><span class="chip">심포지엄</span><span class="chip">의학 학회</span><span class="chip">연구·성과 발표회</span></div></div></section>
 <section><div class="wrap"><div class="eyebrow">SERVICE SCOPE</div><h2 class="section-title">행사 운영 범위</h2><div class="grid4"><article class="card"><b>등록·참석자</b><p>사전·현장 등록, 명찰, 자료 배포, 세션 안내와 참석자 동선을 운영합니다.</p></article><article class="card"><b>좌장·연자 관리</b><p>좌장과 연자의 도착, 대기, 무대 입장, 발표 순서와 시간 정보를 현장 운영팀이 공유합니다.</p></article><article class="card"><b>세션·발표자료</b><p>세션별 큐시트, 발표자료 취합, 파일 백업, 영상·PPT 전환과 질의응답을 운영합니다.</p></article><article class="card"><b>송출·기록</b><p>온라인 중계, 강연 녹화, 현장 사진, 세션별 아카이브 등 행사 후 활용까지 연결할 수 있습니다.</p></article></div></div></section>
+<div class="pe-inline-cta" aria-label="PEOPLEENT 행사 문의">
+  <div><b>행사 준비 중이신가요?</b><span>일정 · 장소 · 예상 인원만 있어도 필요한 운영 범위부터 같이 정리할 수 있습니다.</span></div>
+  <a href="https://peopleent.com/contact" target="_blank" rel="noopener">행사 문의하기 →</a>
+</div>
+
 <section><div class="wrap"><div class="eyebrow">PROCESS</div><h2 class="section-title">준비부터 현장까지</h2><div class="flow"><div>학술 프로그램·세션 확인</div><div>좌장·연자·등록 운영 방식 정리</div><div>발표자료·장비·인력 배치 확정</div><div>세션별 리허설·파일 점검</div><div>본행사 운영·세션 기록</div></div></div></section>
 <section><div class="wrap"><div class="eyebrow">CHECK POINT</div><h2 class="section-title">행사 전에 반드시 확인할 것</h2><div class="checks"><div class="check">좌장·연자 명단과 발표 순서</div><div class="check">세션별 발표·토론 시간</div><div class="check">발표자료 최종 제출 시점</div><div class="check">질의응답 마이크와 통역 여부</div><div class="check">세션별 녹화·온라인 공개 범위</div></div></div></section>
 <section><div class="wrap"><div class="eyebrow">FAQ</div><h2 class="section-title">학회·심포지엄 운영 FAQ</h2><div class="faq"><details><summary>학회 발표자료를 사전에 취합할 수 있나요?</summary><p>발표자별 자료 제출 일정과 파일 형식을 정하고, 최종본 확인과 현장 백업·전환까지 운영할 수 있습니다.</p></details><details><summary>여러 개 세션룸을 동시에 운영할 수 있나요?</summary><p>세션룸별 담당 인력과 발표자료, 장비, 시간표를 분리해 동시 운영 체계를 구성할 수 있습니다.</p></details><details><summary>학술행사를 온라인으로도 송출할 수 있나요?</summary><p>YouTube·Zoom 등 플랫폼을 활용한 실시간 송출과 세션별 녹화를 함께 구성할 수 있습니다.</p></details></div></div></section>
@@ -47,4 +94,8 @@ footer{background:var(--bg);color:#888;padding:28px 0 40px;font-size:12px}.footl
 <section class="cta"><div class="wrap"><h2>행사 조건부터 정리해도 됩니다.</h2><p>일정, 장소, 예상 인원, 행사 형식이 정해져 있다면 필요한 운영 범위를 빠르게 정리할 수 있습니다.</p><div class="btns"><a class="btn primary" href="https://peopleent.com/contact" target="_blank" rel="noopener">행사 문의하기</a><a class="btn" href="/">PEOPLEENT 메인</a></div></div></section>
 </main>
 <footer><div class="wrap">PEOPLEENT · 기업행사 운영대행<div class="footlinks"><a href="/corporate-event/">기업행사</a><a href="/public-event/">공공기관 행사</a><a href="/conference/">컨퍼런스 운영</a><a href="/seminar/">세미나 운영</a><a href="/live-streaming/">행사 라이브 송출</a><a href="/academic-event/">학회·심포지엄 운영</a></div></div></footer>
+<div class="pe-sticky-cta" aria-label="PEOPLEENT 빠른 문의">
+  <div class="pe-sticky-copy"><strong>행사 견적이 필요하신가요?</strong><small>일정 · 장소 · 인원만 알려주셔도 됩니다.</small></div>
+  <a href="https://peopleent.com/contact" target="_blank" rel="noopener">문의하기 →</a>
+</div>
 </body></html>
