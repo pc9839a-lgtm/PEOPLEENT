@@ -1,80 +1,81 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<rss version="2.0">
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>PEOPLEENT 행사 운영 인사이트</title>
     <link>https://peopleent.pagero.kr/insight/</link>
     <description>기업행사 대행 비용, 업체 선정, 공공기관 행사, 컨퍼런스, 라이브 송출, 학회 PCO 등 행사 실무 정보</description>
     <language>ko-KR</language>
-    <lastBuildDate>Thu, 01 Oct 2026 06:00:00 GMT</lastBuildDate>
+    <atom:link href="https://peopleent.pagero.kr/rss.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 02 Oct 2026 08:30:00 GMT</lastBuildDate>
     <item>
-      <title>기업 워크숍 준비, 장소·이동·숙박·프로그램에서 자주 놓치는 것들</title>
+      <title>기업 워크숍 준비 체크리스트</title>
       <link>https://peopleent.pagero.kr/insight/corporate-workshop-planning/</link>
       <guid isPermaLink="true">https://peopleent.pagero.kr/insight/corporate-workshop-planning/</guid>
       <pubDate>Thu, 01 Oct 2026 07:00:00 GMT</pubDate>
-      <description>목적, 참가자, 장소, 이동, 숙박, 식사, 프로그램과 운영 인력을 기준으로 기업 워크숍 준비 순서를 정리했습니다.</description>
+      <description>기업 워크숍의 장소, 단체 이동, 숙박, 식사, 팀빌딩 프로그램, 객실 배정과 현장 진행 항목을 담았습니다.</description>
     </item>
     <item>
-      <title>기업행사 사진 촬영 비용, 몇 시간을 예약해야 할까?</title>
+      <title>기업행사 사진 촬영 비용</title>
       <link>https://peopleent.pagero.kr/insight/event-photography-cost/</link>
       <guid isPermaLink="true">https://peopleent.pagero.kr/insight/event-photography-cost/</guid>
       <pubDate>Thu, 01 Oct 2026 07:00:00 GMT</pubDate>
-      <description>촬영시간, 사진가 인원, 보정과 납품 범위에 따라 기업행사 사진 촬영 비용이 어떻게 달라지는지 정리했습니다.</description>
+      <description>촬영 시간, 사진가 수, 행사 규모, 보정, 원본과 납품 범위에 따라 기업행사 사진 촬영 비용이 달라지는 기준을 담았습니다.</description>
     </item>
     <item>
-      <title>행사 현수막·배너·명찰 제작, 비용보다 먼저 볼 7가지</title>
+      <title>행사 현수막, 배너, 명찰 제작 체크리스트</title>
       <link>https://peopleent.pagero.kr/insight/event-print-production-guide/</link>
       <guid isPermaLink="true">https://peopleent.pagero.kr/insight/event-print-production-guide/</guid>
       <pubDate>Thu, 01 Oct 2026 07:00:00 GMT</pubDate>
-      <description>디자인비와 출력비, 사이즈, 수량, 설치·철거, 수정 마감까지 행사 제작물 실무를 정리했습니다.</description>
+      <description>디자인비, 출력비, 사이즈, 수량, 설치, 철거, 수정 마감 등 행사 제작물 확인 항목을 담았습니다.</description>
     </item>
     <item>
-      <title>기업 세미나 준비 체크리스트, D-30부터 당일까지 실무 순서</title>
+      <title>기업 세미나 준비 체크리스트</title>
       <link>https://peopleent.pagero.kr/insight/corporate-seminar-checklist/</link>
       <guid isPermaLink="true">https://peopleent.pagero.kr/insight/corporate-seminar-checklist/</guid>
       <pubDate>Thu, 01 Oct 2026 06:53:00 GMT</pubDate>
-      <description>처음 기업 세미나를 맡은 담당자를 위해 장소, 예산, 연사, 참가 등록, 발표자료, 음향, 촬영과 리허설을 시간순으로 정리했습니다.</description>
+      <description>기업 세미나 D-30부터 당일까지 장소, 예산, 연사, 참가 등록, 발표자료, 음향, 촬영과 리허설 항목을 담았습니다.</description>
     </item>
     <item>
-      <title>기업행사 대행 비용, 견적서가 업체마다 다른 이유</title>
+      <title>기업행사 대행 비용과 견적 비교</title>
       <link>https://peopleent.pagero.kr/insight/event-agency-cost/</link>
       <guid isPermaLink="true">https://peopleent.pagero.kr/insight/event-agency-cost/</guid>
       <pubDate>Thu, 01 Oct 2026 06:00:00 GMT</pubDate>
-      <description>기업행사 대행 견적을 기획·운영, 현장 인력, 장비, 제작물, 촬영·송출 항목으로 나눠 비교하는 방법을 정리했습니다.</description>
+      <description>기업행사 대행 비용을 장소, 현장 인력, 음향과 영상, 제작물, 촬영, 송출 항목으로 나눠 비교합니다.</description>
     </item>
     <item>
-      <title>행사대행업체 고를 때 포트폴리오보다 먼저 볼 7가지</title>
+      <title>행사대행업체 선정 체크리스트 7가지</title>
       <link>https://peopleent.pagero.kr/insight/event-agency-checklist/</link>
       <guid isPermaLink="true">https://peopleent.pagero.kr/insight/event-agency-checklist/</guid>
       <pubDate>Thu, 01 Oct 2026 06:00:00 GMT</pubDate>
-      <description>행사대행업체를 비교할 때 담당자, 견적 범위, 리허설, 비상 대응과 사후 결과물까지 확인할 항목을 정리했습니다.</description>
+      <description>행사대행업체 비교 시 담당자, 견적 범위, 현장 인력, 리허설, 비상 대응, 사후 결과물을 확인하는 기준입니다.</description>
     </item>
     <item>
-      <title>공공기관 행사 대행, 견적보다 먼저 확인해야 할 실무 항목</title>
+      <title>공공기관 행사 발주 체크리스트</title>
       <link>https://peopleent.pagero.kr/insight/public-event-practical-guide/</link>
       <guid isPermaLink="true">https://peopleent.pagero.kr/insight/public-event-practical-guide/</guid>
       <pubDate>Thu, 01 Oct 2026 06:00:00 GMT</pubDate>
-      <description>공공기관 행사에서 과업 범위, 조달 조건, 의전, 결과보고와 정산을 어떤 순서로 확인해야 하는지 정리했습니다.</description>
+      <description>공공기관 행사 발주 전 과업지시서, 참가 자격, 의전, 결과보고와 정산에서 확인할 항목입니다.</description>
     </item>
     <item>
-      <title>유튜브 라이브 송출 비용, 카메라 대수보다 먼저 확인할 것</title>
+      <title>유튜브 라이브 송출 비용과 견적 항목</title>
       <link>https://peopleent.pagero.kr/insight/live-streaming-cost/</link>
       <guid isPermaLink="true">https://peopleent.pagero.kr/insight/live-streaming-cost/</guid>
       <pubDate>Thu, 01 Oct 2026 06:00:00 GMT</pubDate>
-      <description>라이브 송출 비용을 좌우하는 화면 구성, 음향, 네트워크, 녹화와 운영 범위를 정리했습니다.</description>
+      <description>카메라 수, PPT, 자막, 현장 음향, 인터넷 회선, 운영 인력, 리허설, 녹화본이 송출 견적에 미치는 항목을 담았습니다.</description>
     </item>
     <item>
-      <title>학회·심포지엄 PCO, 일반 행사대행과 무엇이 다를까요?</title>
+      <title>PCO와 일반 행사대행의 차이</title>
       <link>https://peopleent.pagero.kr/insight/pco-vs-event-agency/</link>
       <guid isPermaLink="true">https://peopleent.pagero.kr/insight/pco-vs-event-agency/</guid>
       <pubDate>Thu, 01 Oct 2026 06:00:00 GMT</pubDate>
-      <description>학회와 심포지엄에서 PCO가 맡는 사무국, 등록, 연자·좌장, 전시·후원, 정산 업무를 정리했습니다.</description>
+      <description>학회와 심포지엄에서 PCO가 맡는 사무국, 등록, 연자와 좌장, 전시, 후원, 정산 업무를 일반 행사대행과 비교합니다.</description>
     </item>
     <item>
-      <title>컨퍼런스 운영 체크리스트, 행사 전날까지 꼭 확인할 것</title>
+      <title>컨퍼런스 운영 체크리스트 12가지</title>
       <link>https://peopleent.pagero.kr/insight/conference-operation-checklist/</link>
       <guid isPermaLink="true">https://peopleent.pagero.kr/insight/conference-operation-checklist/</guid>
       <pubDate>Thu, 01 Oct 2026 06:00:00 GMT</pubDate>
-      <description>등록, 발표자료, Q&A, 음향, 리허설과 현장 의사결정까지 컨퍼런스 전날 확인할 항목을 정리했습니다.</description>
+      <description>등록데스크, 발표자, PPT와 영상, 음향, Q&A, 리허설, 송출, 비상 대응 등 컨퍼런스 전날 확인할 12가지를 담았습니다.</description>
     </item>
   </channel>
 </rss>
