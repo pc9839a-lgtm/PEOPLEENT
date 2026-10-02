@@ -31,66 +31,117 @@
 
 <script type="application/ld+json">
 {
-  "@context":"https://schema.org",
-  "@graph":[
+  "@context": "https://schema.org",
+  "@graph": [
     {
-      "@type":"Organization",
-      "@id":"https://peopleent.pagero.kr/#organization",
-      "name":"PEOPLEENT",
-      "url":"https://peopleent.pagero.kr/",
-      "email":"contact@peopleent.com",
-      "telephone":["1800-2628","010-6497-2628"],
-      "sameAs":["https://peopleent.com/"]
-    },
-    {
-      "@type":"WebSite",
-      "@id":"https://peopleent.pagero.kr/#website",
-      "url":"https://peopleent.pagero.kr/",
-      "name":"PEOPLEENT 기업행사 운영대행",
-      "inLanguage":"ko-KR",
-      "publisher":{"@id":"https://peopleent.pagero.kr/#organization"}
-    },
-    {
-      "@type":"Service",
-      "@id":"https://peopleent.pagero.kr/#service",
-      "name":"기업행사 운영대행",
-      "provider":{"@id":"https://peopleent.pagero.kr/#organization"},
-      "areaServed":{"@type":"Country","name":"대한민국"},
-      "serviceType":[
-        "기업행사 운영대행",
-        "공공기관 행사 운영",
-        "컨퍼런스 운영",
-        "세미나 운영",
-        "학회/심포지엄 운영",
-        "YouTube 라이브 송출",
-        "Zoom 웨비나 운영",
-        "행사 촬영/녹화",
-        "행사 디자인/인쇄물 제작"
+      "@type": "Organization",
+      "@id": "https://peopleent.pagero.kr/#organization",
+      "name": "PEOPLEENT",
+      "url": "https://peopleent.pagero.kr/",
+      "email": "contact@peopleent.com",
+      "telephone": [
+        "1800-2628",
+        "010-6497-2628"
+      ],
+      "sameAs": [
+        "https://peopleent.com/"
+      ],
+      "contactPoint": [
+        {
+          "@type": "ContactPoint",
+          "telephone": "1800-2628",
+          "contactType": "sales",
+          "areaServed": "KR",
+          "availableLanguage": [
+            "ko"
+          ]
+        }
       ]
     },
     {
-      "@type":"FAQPage",
-      "@id":"https://peopleent.pagero.kr/#faq",
-      "mainEntity":[
+      "@type": "WebSite",
+      "@id": "https://peopleent.pagero.kr/#website",
+      "url": "https://peopleent.pagero.kr/",
+      "name": "PEOPLEENT 기업행사 운영대행",
+      "inLanguage": "ko-KR",
+      "publisher": {
+        "@id": "https://peopleent.pagero.kr/#organization"
+      }
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://peopleent.pagero.kr/#webpage",
+      "url": "https://peopleent.pagero.kr/",
+      "name": "기업행사 대행 | 컨퍼런스, 세미나, 공공기관 행사 운영 | PEOPLEENT",
+      "description": "기업행사 대행과 행사 운영. 컨퍼런스, 세미나, 공공기관 행사, 학회와 심포지엄의 현장 운영, 음향과 영상, 라이브 송출, 촬영, 디자인 제작을 진행합니다.",
+      "inLanguage": "ko-KR",
+      "isPartOf": {
+        "@id": "https://peopleent.pagero.kr/#website"
+      },
+      "mainEntity": {
+        "@id": "https://peopleent.pagero.kr/#service"
+      }
+    },
+    {
+      "@type": "Service",
+      "@id": "https://peopleent.pagero.kr/#service",
+      "name": "기업행사 대행 및 행사 운영",
+      "provider": {
+        "@id": "https://peopleent.pagero.kr/#organization"
+      },
+      "areaServed": {
+        "@type": "Country",
+        "name": "대한민국"
+      },
+      "serviceType": [
+        "기업행사 대행",
+        "공공기관 행사 운영",
+        "컨퍼런스 운영",
+        "세미나 운영",
+        "학회 심포지엄 운영",
+        "YouTube 라이브 송출",
+        "Zoom 웨비나 운영",
+        "행사 촬영 및 녹화",
+        "행사 디자인 및 인쇄물 제작"
+      ],
+      "url": "https://peopleent.pagero.kr/",
+      "description": "기업행사, 컨퍼런스, 세미나, 공공기관 행사, 학회와 심포지엄의 현장 운영, 음향과 영상, 라이브 송출, 촬영, 디자인 제작을 진행합니다."
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://peopleent.pagero.kr/#faq",
+      "mainEntity": [
         {
-          "@type":"Question",
-          "name":"어떤 행사를 운영하나요?",
-          "acceptedAnswer":{"@type":"Answer","text":"기업 컨퍼런스, 공공기관 행사, 학회/심포지엄, 병원/의료 세미나, 포럼, 워크숍/강연, 온라인/하이브리드 행사를 운영합니다."}
+          "@type": "Question",
+          "name": "어떤 행사를 운영하나요?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "기업 컨퍼런스, 공공기관 행사, 학회/심포지엄, 병원/의료 세미나, 포럼, 워크숍/강연, 온라인/하이브리드 행사를 운영합니다."
+          }
         },
         {
-          "@type":"Question",
-          "name":"YouTube나 Zoom 라이브 송출도 가능한가요?",
-          "acceptedAnswer":{"@type":"Answer","text":"YouTube Live, Zoom Meeting/Webinar를 비롯해 송출 화면, 자막, 발표자료 전환과 온라인 플랫폼 운영을 지원합니다."}
+          "@type": "Question",
+          "name": "YouTube나 Zoom 라이브 송출도 가능한가요?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "YouTube Live, Zoom Meeting/Webinar를 비롯해 송출 화면, 자막, 발표자료 전환과 온라인 플랫폼 운영을 지원합니다."
+          }
         },
         {
-          "@type":"Question",
-          "name":"행사 사진과 영상 촬영도 함께 진행할 수 있나요?",
-          "acceptedAnswer":{"@type":"Answer","text":"행사 영상 녹화, 현장 사진 촬영, 강의영상 제작, 하이라이트 및 아카이빙까지 진행할 수 있습니다."}
+          "@type": "Question",
+          "name": "행사 사진과 영상 촬영도 함께 진행할 수 있나요?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "행사 영상 녹화, 현장 사진 촬영, 강의영상 제작, 하이라이트 및 아카이빙까지 진행할 수 있습니다."
+          }
         },
         {
-          "@type":"Question",
-          "name":"행사 디자인과 인쇄물도 제작하나요?",
-          "acceptedAnswer":{"@type":"Answer","text":"키비주얼, 현수막, X배너, 포스터, 명찰, 명패, 자료집, 포토존 등 행사 디자인과 현장 제작물을 지원합니다."}
+          "@type": "Question",
+          "name": "행사 디자인과 인쇄물도 제작하나요?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "키비주얼, 현수막, X배너, 포스터, 명찰, 명패, 자료집, 포토존 등 행사 디자인과 현장 제작물을 지원합니다."
+          }
         }
       ]
     }
