@@ -1,0 +1,37 @@
+name: PEOPLEENT insight live publication
+on:
+  pull_request:
+    paths: ['.github/workflows/insight-live-check.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  live:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Verify current Cloudflare Pages HTML & stylesheet
+        run: |
+          python3 - <<'PY'
+          import sys,urllib.request
+          tests=[
+            ('https://peopleent.pagero.kr/insight/', 'event-rfp-writing'),
+            ('https://peopleent.pagero.kr/insight/event-rfp-writing/','행사대행 제안요청서'),
+            ('https://peopleent.pagero.kr/insight/event-safety-response-plan/','행사 안전관리와 비상 대응'),
+            ('https://peopleent.pagero.kr/assets/insight-article.css','--accent'),
+            ('https://peopleent.pagero.kr/sitemap.xml','event-rfp-writing'),
+            ('https://peopleent.pagero.kr/rss.xml','event-rfp-writing'),
+          ]
+          errors=[]
+          for url,needle in tests:
+            try:
+              with urllib.request.urlopen(urllib.request.Request(url,headers={'User-Agent':'Mozilla/5.0 PEOPLEENT QA','Cache-Control':'no-cache'}),timeout=15) as r:
+                content=r.read().decode('utf-8','replace')
+                ok=r.status==200 and needle in content
+                print(('PASS' if ok else 'FAIL'),r.status,url,'bytes',len(content),'found',needle in content)
+                if not ok:errors.append(url)
+            except Exception as e:
+              print('FAIL',url,repr(e))
+              errors.append(url)
+          if errors:sys.exit('Live publication check failed: '+', '.join(errors))
+          PY
