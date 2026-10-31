@@ -8,6 +8,9 @@ on:
       - 'sitemap.xml'
       - 'rss.xml'
       - 'scripts/verify_insight_release.py'
+      - 'scripts/test_insight_interactions.mjs'
+      - 'assets/insight-tools.js'
+      - 'assets/insight-tools.css'
       - '.github/workflows/insight-quality.yml'
   push:
     branches: [main]
@@ -26,5 +29,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - name: Set up Node 24
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: Check standalone JavaScript syntax
+        run: |
+          node --check assets/insight-tools.js
+          node --check scripts/test_insight_interactions.mjs
       - name: Validate sitemap, RSS, JSON-LD, canonical, article depth and internal links
         run: python3 scripts/verify_insight_release.py
+      - name: Test actual insight page interactions in Chrome
+        run: |
+          CHROME_BIN="$(command -v google-chrome || command -v google-chrome-stable || command -v chromium)" node scripts/test_insight_interactions.mjs
