@@ -15,7 +15,13 @@ jobs:
           python3 - <<'PY'
           import sys,urllib.request
           tests=[
-            ('https://peopleent.pagero.kr/insight/', 'event-rfp-writing'),
+            ('https://peopleent.pagero.kr/insight/', 'data-pe-topic='),
+            ('https://peopleent.pagero.kr/insight/event-agency-cost/','data-pe-vendor-comparison'),
+            ('https://peopleent.pagero.kr/insight/event-rfp-writing/','id="rfp-draft"'),
+            ('https://peopleent.pagero.kr/insight/event-agency-checklist/','vendor-evidence-checklist'),
+            ('https://peopleent.pagero.kr/insight/public-event-practical-guide/','public-event-acceptance'),
+            ('https://peopleent.pagero.kr/assets/insight-tools.js','data-pe-vendor-comparison'),
+            ('https://peopleent.pagero.kr/assets/insight-tools.css','.pe-tool{'),
             ('https://peopleent.pagero.kr/insight/event-rfp-writing/','행사대행 제안요청서'),
             ('https://peopleent.pagero.kr/insight/event-safety-response-plan/','행사 안전관리와 비상 대응'),
             ('https://peopleent.pagero.kr/assets/insight-article.css','--accent'),
