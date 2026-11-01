@@ -47,14 +47,14 @@ try {
  const hub=await run(`(()=>{
   const cards=[...document.querySelectorAll('#pe-articles .card')];
   const input=document.getElementById('pe-guide-search');
-  if(cards.length!==20||!input)return {pass:false,why:'missing cards/search',count:cards.length};
+  if(cards.length!==21||!input)return {pass:false,why:'missing cards/search',count:cards.length};
   input.value='RFP';input.dispatchEvent(new Event('input',{bubbles:true}));
   const matched=cards.filter(x=>!x.hidden).length;
   input.value='';input.dispatchEvent(new Event('input',{bubbles:true}));
   const filter=document.querySelector('[data-pe-topic="발주·견적"]');filter.click();
   const filtered=cards.filter(x=>!x.hidden).length;
   document.querySelector('[data-pe-topic="전체"]').click();
-  return {pass:matched>=1&&matched<20&&filtered===6&&cards.every(x=>!x.hidden),searched:matched,filtered,all:cards.length};
+  return {pass:matched>=1&&matched<cards.length&&filtered===6&&cards.every(x=>!x.hidden),searched:matched,filtered,all:cards.length};
  })()`);
  if(!hub?.pass)throw Error('Hub search/topic filter failure '+JSON.stringify(hub));
  console.log('PASS hub search/topic',JSON.stringify(hub));
