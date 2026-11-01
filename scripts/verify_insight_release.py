@@ -67,19 +67,19 @@ def main():
     check((ROOT/"assets/insight-article.css").exists(), "Article shared CSS absent")
     xml = ET.parse(ROOT/"sitemap.xml").getroot()
     sitemap = [node.text for node in xml.iter() if node.tag.endswith("}loc")]
-    check(len(sitemap) == 28 and len(set(sitemap)) == 28, "Sitemap must have 28 unique URLs")
+    check(len(sitemap) == 29 and len(set(sitemap)) == 29, "Sitemap must have 29 unique URLs")
     rss_root = ET.parse(ROOT/"rss.xml").getroot()
     rss_items = rss_root.findall("./channel/item")
-    check(len(rss_items) == 20, "RSS must include 20 items")
+    check(len(rss_items) == 21, "RSS must include 21 items")
     rss_links = [x.findtext("link") for x in rss_items]
-    check(len(set(rss_links)) == 20, "RSS duplicate links")
+    check(len(set(rss_links)) == 21, "RSS duplicate links")
     hub_file = ROOT/"insight/index.html"
     hub = parse_html(hub_file)
     hub_links = [x for x in hub.hrefs if re.fullmatch(r"/insight/[^/]+/", x)]
-    check(len(hub_links) == 20 and len(set(hub_links)) == 20, "Hub must display 20 unique article cards")
+    check(len(hub_links) == 21 and len(set(hub_links)) == 21, "Hub must display 21 unique article cards")
     check(len(hub.lds) == 1, "Hub JSON-LD missing or duplicated")
     itemlist = next(x for x in hub.lds[0]["@graph"] if x["@type"] == "ItemList")
-    check(itemlist["numberOfItems"] == 20 and len(itemlist["itemListElement"]) == 20, "Hub ItemList count mismatch")
+    check(itemlist["numberOfItems"] == 21 and len(itemlist["itemListElement"]) == 21, "Hub ItemList count mismatch")
     for slug in NEW:
         path = ROOT/"insight"/slug/"index.html"
         check(path.exists(), f"New article missing: {slug}")
@@ -100,6 +100,30 @@ def main():
         for href in p.hrefs:
             target = target_path(href)
             if target: check(target.exists(), f"Broken internal related link in {slug}: {href}")
+    # New staffing guide has a distinct editorial format from the ten 2026-10-29 guides.
+    staffing_slug = "event-staffing-plan"
+    staffing_path = ROOT/"insight"/staffing_slug/"index.html"
+    check(staffing_path.exists(), "Staffing guide missing")
+    staffing_html = staffing_path.read_text(encoding="utf-8")
+    staffing = parse_html(staffing_path)
+    staffing_url = f"{BASE}/insight/{staffing_slug}/"
+    check(staffing.canonicals == [staffing_url], "Staffing guide canonical mismatch")
+    check(staffing.headings == ["h1"], "Staffing guide H1 mismatch")
+    check(len(staffing.lds) == 1, "Staffing guide JSON-LD missing")
+    staffing_article = next(x for x in staffing.lds[0]["@graph"] if x["@type"] == "Article")
+    check(staffing_article["datePublished"] == "2026-11-01" and staffing_article["mainEntityOfPage"]["@id"] == staffing_url,
+          "Staffing guide article date/canonical mismatch")
+    check(all(f'id="{anchor}"' in staffing_html for anchor in
+              ("roles", "collision", "sample", "handoff", "quote", "faq")),
+          "Staffing guide missing substantive sections")
+    check(staffing_html.count("<details>") >= 4, "Staffing guide FAQ missing")
+    check(len(re.sub(r"<[^>]+>", "", staffing_html)) > 3500, "Staffing guide editorial depth too low")
+    check(staffing_url in sitemap and staffing_url in rss_links,
+          "Staffing guide absent from sitemap/RSS")
+    check(f"/insight/{staffing_slug}/" in hub_links, "Staffing guide missing from hub")
+    for href in staffing.hrefs:
+        target = target_path(href)
+        if target: check(target.exists(), f"Broken staffing guide link: {href}")
     for href in hub_links:
         target = target_path(href)
         check(target is not None and target.exists(), f"Broken hub link: {href}")
