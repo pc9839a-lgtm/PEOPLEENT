@@ -20,6 +20,7 @@ on:
       - 'sitemap.xml'
       - 'rss.xml'
       - 'scripts/verify_insight_release.py'
+      - 'scripts/test_insight_interactions.mjs'
       - '.github/workflows/insight-quality.yml'
   workflow_dispatch:
 permissions:
