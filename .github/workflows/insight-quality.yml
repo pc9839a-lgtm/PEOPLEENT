@@ -8,6 +8,9 @@ on:
       - 'functions/_middleware.js'
       - 'robots.txt'
       - 'scripts/verify_site_seo.py'
+      - 'scripts/check_live_indexability.py'
+      - 'scripts/test_live_indexability.py'
+      - '.github/workflows/live-indexability.yml'
       - 'scripts/test_middleware_seo.mjs'
       - 'assets/peopleent-engagement.js'
       - 'scripts/test_engagement_events.mjs'
@@ -30,6 +33,9 @@ on:
       - 'functions/_middleware.js'
       - 'robots.txt'
       - 'scripts/verify_site_seo.py'
+      - 'scripts/check_live_indexability.py'
+      - 'scripts/test_live_indexability.py'
+      - '.github/workflows/live-indexability.yml'
       - 'scripts/test_middleware_seo.mjs'
       - 'assets/peopleent-engagement.js'
       - 'scripts/test_engagement_events.mjs'
@@ -62,6 +68,8 @@ jobs:
           node --check scripts/test_insight_interactions.mjs
       - name: Validate all published pages, canonicals, sitemap and links
         run: python3 scripts/verify_site_seo.py
+      - name: Test deployed-indexability checker without external traffic
+        run: python3 scripts/test_live_indexability.py
       - name: Validate sitemap, RSS, JSON-LD, canonical, article depth and internal links
         run: python3 scripts/verify_insight_release.py
       - name: Test preview and production SEO response headers
