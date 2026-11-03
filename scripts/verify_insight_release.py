@@ -67,19 +67,19 @@ def main():
     check((ROOT/"assets/insight-article.css").exists(), "Article shared CSS absent")
     xml = ET.parse(ROOT/"sitemap.xml").getroot()
     sitemap = [node.text for node in xml.iter() if node.tag.endswith("}loc")]
-    check(len(sitemap) == 29 and len(set(sitemap)) == 29, "Sitemap must have 29 unique URLs")
+    check(len(sitemap) == 31 and len(set(sitemap)) == 31, "Sitemap must have 31 unique URLs")
     rss_root = ET.parse(ROOT/"rss.xml").getroot()
     rss_items = rss_root.findall("./channel/item")
-    check(len(rss_items) == 21, "RSS must include 21 items")
+    check(len(rss_items) == 23, "RSS must include 23 items")
     rss_links = [x.findtext("link") for x in rss_items]
-    check(len(set(rss_links)) == 21, "RSS duplicate links")
+    check(len(set(rss_links)) == 23, "RSS duplicate links")
     hub_file = ROOT/"insight/index.html"
     hub = parse_html(hub_file)
     hub_links = [x for x in hub.hrefs if re.fullmatch(r"/insight/[^/]+/", x)]
-    check(len(hub_links) == 21 and len(set(hub_links)) == 21, "Hub must display 21 unique article cards")
+    check(len(hub_links) == 23 and len(set(hub_links)) == 23, "Hub must display 23 unique article cards")
     check(len(hub.lds) == 1, "Hub JSON-LD missing or duplicated")
     itemlist = next(x for x in hub.lds[0]["@graph"] if x["@type"] == "ItemList")
-    check(itemlist["numberOfItems"] == 21 and len(itemlist["itemListElement"]) == 21, "Hub ItemList count mismatch")
+    check(itemlist["numberOfItems"] == 23 and len(itemlist["itemListElement"]) == 23, "Hub ItemList count mismatch")
     for slug in NEW:
         path = ROOT/"insight"/slug/"index.html"
         check(path.exists(), f"New article missing: {slug}")
@@ -124,6 +124,33 @@ def main():
     for href in staffing.hrefs:
         target = target_path(href)
         if target: check(target.exists(), f"Broken staffing guide link: {href}")
+    # The newest guides use the same visible FAQ, schema and copyable tool checks.
+    for slug in ("event-venue-site-inspection", "event-photo-video-shot-list"):
+        page = ROOT / "insight" / slug / "index.html"
+        check(page.exists(), f"New practical guide missing: {slug}")
+        doc = page.read_text(encoding="utf-8")
+        parsed = parse_html(page)
+        url = f"{BASE}/insight/{slug}/"
+        check(parsed.canonicals == [url], f"New guide canonical mismatch: {slug}")
+        check(parsed.headings == ["h1"], f"New guide H1 mismatch: {slug}")
+        check(len(parsed.lds) == 1, f"New guide JSON-LD missing: {slug}")
+        article = next(x for x in parsed.lds[0]["@graph"] if x["@type"] == "Article")
+        check(article["datePublished"] == "2026-11-03" and article["mainEntityOfPage"]["@id"] == url,
+              f"New guide metadata mismatch: {slug}")
+        clean = re.sub(r"<style[^>]*>.*?</style>|<script[^>]*>.*?</script>", "", doc, flags=re.I | re.S)
+        check(len(re.sub(r"<[^>]+>", "", clean)) > 4000, f"Insufficient guide content: {slug}")
+        check(doc.count('<details><summary>') >= 4, f"New guide missing FAQ: {slug}")
+        check(all(f'id="{name}"' in doc for name in ("prep", "layout", "tech", "loading", "contract", "template") if slug == "event-venue-site-inspection"),
+              f"Venue guide section missing: {slug}")
+        check(all(f'id="{name}"' in doc for name in ("purpose", "matrix", "collision", "permissions", "delivery", "template") if slug == "event-photo-video-shot-list"),
+              f"Photo guide section missing: {slug}")
+        check('id="guide-copy"' in doc and 'id="guide-template"' in doc, f"New guide template copy missing: {slug}")
+        check(url in sitemap and url in rss_links and f"/insight/{slug}/" in hub_links,
+              f"New guide navigation incomplete: {slug}")
+        for href in parsed.hrefs:
+            target = target_path(href)
+            if target:
+                check(target.exists(), f"New guide has broken internal link: {slug}: {href}")
     for href in hub_links:
         target = target_path(href)
         check(target is not None and target.exists(), f"Broken hub link: {href}")
