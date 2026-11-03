@@ -144,7 +144,7 @@ try {
   window.confirm=()=>true;
   document.querySelector('[data-guide-action="clear"]').click();
   const clear=localStorage.getItem('peopleent:insight:venue:draft:v1')===null&&a.value==='미확인'&&n.value===''&&!document.getElementById('guide-template').value.includes('QA_VENUE_DRAFT');
-  return {pass:ok&&csvOk&&clear,restored:ok,csv:csvOk,reset:clear};
+  return {pass:ok&&csvOk&&clear,restored:ok,csv:csvOk,reset:clear,csvDebug:{bom:csv.charCodeAt(0),safe:csv.includes("'=1+2")||csv.includes("'=HYPERLINK"),filename:filename||null,rows:csv.split(String.fromCharCode(13,10)).filter(Boolean).length,preview:csv.slice(0,180),status:document.querySelector('[data-guide-storage-status]')?.textContent}};
  })()`);
  if(!venueLoaded?.pass)throw Error('Venue restore, CSV or clear failure '+JSON.stringify(venueLoaded));
  console.log('PASS venue save-restore, escaped CSV and clear',JSON.stringify(venueLoaded));
@@ -180,7 +180,7 @@ try {
   window.confirm=()=>true;
   document.querySelector('[data-guide-action="clear"]').click();
   const clear=localStorage.getItem('peopleent:insight:shot:draft:v1')===null&&a.value==='미확인'&&n.value===''&&!document.getElementById('guide-template').value.includes('QA_SHOT_DRAFT');
-  return {pass:ok&&csvOk&&clear,restored:ok,csv:csvOk,reset:clear};
+  return {pass:ok&&csvOk&&clear,restored:ok,csv:csvOk,reset:clear,csvDebug:{bom:csv.charCodeAt(0),safe:csv.includes("'=1+2")||csv.includes("'=HYPERLINK"),filename:filename||null,rows:csv.split(String.fromCharCode(13,10)).filter(Boolean).length,preview:csv.slice(0,180),status:document.querySelector('[data-guide-storage-status]')?.textContent}};
  })()`);
  if(!shotLoaded?.pass)throw Error('Shot restore, CSV or clear failure '+JSON.stringify(shotLoaded));
  console.log('PASS shot save-restore, escaped CSV and clear',JSON.stringify(shotLoaded));
