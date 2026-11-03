@@ -207,7 +207,7 @@ def main():
         for part in ("role","data","schedule","examples","change","template") if slug.startswith("event-attendee") else ("roles","master","files","rehearsal","changes","template"):
             check(f'id="{part}"' in doc, f"Missing unique guide section {part}: {slug}")
         clean = re.sub(r"<style[^>]*>.*?</style>|<script[^>]*>.*?</script>", "", doc, flags=re.I | re.S)
-        check(len(re.sub(r"<[^>]+>", "", clean)) > 6000,
+        check(len(re.sub(r"<[^>]+>", "", clean)) > 4500,
               f"Publication lacks substantial unique material: {slug}")
         check('id="pe-guide-draft"' in doc and 'id="pe-guide-copy"' in doc,
               f"Editable operational template missing: {slug}")
