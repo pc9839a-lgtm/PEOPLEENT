@@ -47,14 +47,14 @@ try {
  const hub=await run(`(()=>{
   const cards=[...document.querySelectorAll('#pe-articles .card')];
   const input=document.getElementById('pe-guide-search');
-  if(cards.length!==25||!input)return {pass:false,why:'missing cards/search',count:cards.length};
+  if(cards.length!==27||!input)return {pass:false,why:'missing cards/search',count:cards.length};
   input.value='RFP';input.dispatchEvent(new Event('input',{bubbles:true}));
   const matched=cards.filter(x=>!x.hidden).length;
   input.value='';input.dispatchEvent(new Event('input',{bubbles:true}));
   const filter=document.querySelector('[data-pe-topic="발주·견적"]');filter.click();
   const filtered=cards.filter(x=>!x.hidden).length;
   document.querySelector('[data-pe-topic="전체"]').click();
-  return {pass:matched>=1&&matched<cards.length&&filtered===6&&cards.every(x=>!x.hidden),searched:matched,filtered,all:cards.length};
+  return {pass:matched>=1&&matched<cards.length&&filtered===cards.filter(x=>x.dataset.topic==='발주·견적').length&&cards.every(x=>!x.hidden),searched:matched,filtered,all:cards.length};
  })()`);
  if(!hub?.pass)throw Error('Hub search/topic filter failure '+JSON.stringify(hub));
  console.log('PASS hub search/topic',JSON.stringify(hub));
@@ -213,6 +213,32 @@ try {
   })()`);
   if(!detail?.pass)throw Error('New guide browser validation failed '+guide.route+' '+JSON.stringify(detail));
   console.log('PASS new practical guide template and FAQ',guide.route,JSON.stringify(detail));
+ }
+
+
+ const finalGuides=[
+  ['/insight/event-satisfaction-survey-questions/','행사 만족도 설문 문항 예시와 결과 분석법',['purpose','questions','open','timing','analysis','template']],
+  ['/insight/event-vendor-purchase-order-change-control/','행사 협력업체 발주서와 추가 비용 변경관리',['scope','fields','workflow','handoff','reconcile','template']]
+ ];
+ for(const [route,heading,sections] of finalGuides){
+  await open(route);
+  const result=await run(`(async()=>{
+    const input=document.getElementById('pe-guide-draft'),button=document.getElementById('pe-guide-copy'),
+          status=document.getElementById('pe-guide-copy-status');
+    const title=document.querySelector('h1')?.textContent.trim();
+    const faq=document.querySelectorAll('#faq details');
+    const ids=[...document.querySelectorAll('article section[id]')].map(x=>x.id);
+    if(!input||!button||!status)return {pass:false,reason:'Missing copy controls'};
+    const initial=input.value;
+    input.value=initial+' [TEST]';
+    button.click();
+    await new Promise(resolve=>setTimeout(resolve,100));
+    return {pass:initial.length>500&&input.value.endsWith('[TEST]')&&(status.textContent.includes('복사')||status.textContent.includes('선택'))&&faq.length===4,initialLength:initial.length,title,sections:ids,faq:faq.length,status:status.textContent};
+  })()`);
+  if(!result?.pass||result.title!==heading||sections.some(x=>!result.sections.includes(x))){
+    throw Error('New guide render/copy QA failed '+route+' '+JSON.stringify(result));
+  }
+  console.log('PASS new guide content + copy controls',route,JSON.stringify(result));
  }
 
  console.log('PASS three critical existing-page interactions');
