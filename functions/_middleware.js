@@ -3,10 +3,11 @@
 const HOST = 'peopleent.pagero.kr';
 const GA4_ID = 'G-501Z526B8H';
 const MARKER = 'data-pagero-portfolio-ga4';
+const ENGAGEMENT_MARKER = 'data-peopleent-engagement';
 const RESTRICTED_PATH = /^\/(?:api|admin|dashboard|account)(?:\/|$)/i;
 
 function tag() {
-  return `<script ${MARKER}>(function(){if(location.hostname!=='${HOST}')return;window.dataLayer=window.dataLayer||[];window.gtag=window.gtag||function(){window.dataLayer.push(arguments)};window.gtag('js',new Date());window.gtag('config','${GA4_ID}');var s=document.createElement('script');s.async=true;s.src='https://www.googletagmanager.com/gtag/js?id=${GA4_ID}';document.head.appendChild(s)})();</script>`;
+  return `<script ${MARKER}>(function(){if(location.hostname!=='${HOST}')return;window.dataLayer=window.dataLayer||[];window.gtag=window.gtag||function(){window.dataLayer.push(arguments)};window.gtag('js',new Date());window.gtag('config','${GA4_ID}');var s=document.createElement('script');s.async=true;s.src='https://www.googletagmanager.com/gtag/js?id=${GA4_ID}';document.head.appendChild(s)})();</script><script defer ${ENGAGEMENT_MARKER} src="/assets/peopleent-engagement.js"></script>`;
 }
 
 export async function onRequest(context) {
