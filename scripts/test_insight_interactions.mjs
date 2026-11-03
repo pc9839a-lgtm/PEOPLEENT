@@ -47,7 +47,7 @@ try {
  const hub=await run(`(()=>{
   const cards=[...document.querySelectorAll('#pe-articles .card')];
   const input=document.getElementById('pe-guide-search');
-  if(cards.length!==25||!input)return {pass:false,why:'missing cards/search',count:cards.length};
+  if(cards.length!==27||!input)return {pass:false,why:'missing cards/search',count:cards.length};
   input.value='RFP';input.dispatchEvent(new Event('input',{bubbles:true}));
   const matched=cards.filter(x=>!x.hidden).length;
   input.value='';input.dispatchEvent(new Event('input',{bubbles:true}));
