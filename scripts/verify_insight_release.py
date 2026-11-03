@@ -144,6 +144,28 @@ def main():
               f"Venue guide section missing: {slug}")
         check(all(f'id="{name}"' in doc for name in ("purpose", "matrix", "collision", "permissions", "delivery", "template") if slug == "event-photo-video-shot-list"),
               f"Photo guide section missing: {slug}")
+        faq = next(x for x in parsed.lds[0]["@graph"] if x["@type"] == "FAQPage")["mainEntity"]
+        visible_faq = re.findall(r"<details><summary>(.*?)</summary><p>(.*?)</p></details>", doc, flags=re.S)
+        check(len(faq) == len(visible_faq) == 4 and all(
+              x["name"] == visible_faq[i][0] and x["acceptedAnswer"]["text"] == visible_faq[i][1]
+              for i, x in enumerate(faq)), f"New guide FAQ/schema mismatch: {slug}")
+        if slug == "event-venue-site-inspection":
+            check(all(f'id="{key}"' in doc for key in ("decision", "compare", "copy-venue-audit", "audit-a", "audit-b")),
+                  "Venue comparison elements missing")
+            check(len(re.findall(r'<select[^>]*data-venue="[AB]"', doc)) == 16,
+                  "Venue comparison should have eight criteria for two sites")
+            check("안전·접근성" in doc and "진행 불가" in doc,
+                  "Venue approval and condition distinctions absent")
+        else:
+            check(all(f'id="{key}"' in doc for key in ("handoff", "tracker", "acceptance",
+                      "copy-shot-tracker", "shot-summary", "shot-priority")),
+                  "Photo shot tracker elements missing")
+            check(len(re.findall(r'<select[^>]*data-shot-status="\d+"', doc)) == 12,
+                  "Photo shot tracker must include twelve rows")
+            check(len(re.findall(r'<input[^>]*data-shot-note="\d+"', doc)) == 12,
+                  "Photo tracker notes missing")
+            check("시상 장면을 촬영하지 못했다면" in doc,
+                  "Photo recovery guidance missing")
         check('id="guide-copy"' in doc and 'id="guide-template"' in doc, f"New guide template copy missing: {slug}")
         check(url in sitemap and url in rss_links and f"/insight/{slug}/" in hub_links,
               f"New guide navigation incomplete: {slug}")

@@ -80,6 +80,38 @@ try {
  })()`);
  if(!cost?.pass)throw Error('Cost comparison failure '+JSON.stringify(cost));
  console.log('PASS cost comparison tool',JSON.stringify(cost));
+
+ await open('/insight/event-venue-site-inspection/');
+ const venue=await run(`(()=>{
+  const selectors=[...document.querySelectorAll('select[data-venue]')];
+  const a=selectors.find(x=>x.id==='venue-A-0');
+  const b=selectors.find(x=>x.id==='venue-B-5');
+  const summary=document.getElementById('audit-a');
+  const warning=document.getElementById('audit-b-alert');
+  const button=document.getElementById('copy-venue-audit');
+  if(selectors.length!==16||!a||!b||!summary||!warning||!button)return {pass:false,why:'missing venue inputs'};
+  a.value='확인 완료';a.dispatchEvent(new Event('change',{bubbles:true}));
+  b.value='진행 불가';b.dispatchEvent(new Event('change',{bubbles:true}));
+  return {pass:summary.textContent.includes('확인 완료 1건')&&warning.textContent.includes('안전·접근성 등 추가 확인 2건')&&button.type==='button',summary:summary.textContent,warn:warning.textContent};
+ })()`);
+ if(!venue?.pass)throw Error('Venue comparison tool failure '+JSON.stringify(venue));
+ console.log('PASS venue A/B evidence tracker',JSON.stringify(venue));
+ await open('/insight/event-photo-video-shot-list/');
+ const shot=await run(`(()=>{
+  const statuses=[...document.querySelectorAll('select[data-shot-status]')];
+  const notes=[...document.querySelectorAll('input[data-shot-note]')];
+  const summary=document.getElementById('shot-summary');
+  const priority=document.getElementById('shot-priority');
+  const button=document.getElementById('copy-shot-tracker');
+  if(statuses.length!==12||notes.length!==12||!summary||!priority||!button)return {pass:false,why:'missing shot tracker'};
+  statuses[0].value='확보';statuses[0].dispatchEvent(new Event('change',{bubbles:true}));
+  statuses[1].value='제외 승인';statuses[1].dispatchEvent(new Event('change',{bubbles:true}));
+  notes[0].value='CAM-A / 0001';notes[0].dispatchEvent(new Event('input',{bubbles:true}));
+  return {pass:summary.textContent.includes('확보 1건')&&summary.textContent.includes('제외 승인 1건')&&priority.textContent.includes('필수 장면 미완료 5건')&&button.type==='button',summary:summary.textContent,priority:priority.textContent};
+ })()`);
+ if(!shot?.pass)throw Error('Photo shot tracker failure '+JSON.stringify(shot));
+ console.log('PASS 12-shot live capture tracker',JSON.stringify(shot));
+
  console.log('PASS three critical existing-page interactions');
 } finally {
  if(socket)socket.close();
