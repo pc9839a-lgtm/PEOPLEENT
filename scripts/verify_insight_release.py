@@ -166,6 +166,19 @@ def main():
                   "Photo tracker notes missing")
             check("시상 장면을 촬영하지 못했다면" in doc,
                   "Photo recovery guidance missing")
+        check('data-guide-draft-key="peopleent:insight:' in doc and 'data-guide-storage-status' in doc,
+              f"Explicit browser draft UI missing: {slug}")
+        check(all(len(re.findall(r'<button\b[^>]*data-guide-action="' + action + r'"', doc)) == 1
+                  for action in ("save", "csv", "clear")),
+              f"Draft save/CSV/clear buttons missing: {slug}")
+        check('<script src="/assets/insight-draft-tools.js" defer></script>' in doc,
+              f"Shared draft tool not loaded: {slug}")
+        if slug == "event-venue-site-inspection":
+            check(len(re.findall(r'<input[^>]*data-venue-note="[AB]-\d+"', doc)) == 16,
+                  "Venue evidence note fields must match A/B items")
+        else:
+            check('peopleent:insight:shot:draft:v1' in doc,
+                  "Shot draft storage key missing")
         check('id="guide-copy"' in doc and 'id="guide-template"' in doc, f"New guide template copy missing: {slug}")
         check(url in sitemap and url in rss_links and f"/insight/{slug}/" in hub_links,
               f"New guide navigation incomplete: {slug}")
