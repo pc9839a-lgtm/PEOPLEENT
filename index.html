@@ -1302,13 +1302,16 @@ a{color:inherit}
  .service-directory .type-desc{font-size:9px}
 }
 
+
+/* Keep service directory cards unobstructed on narrow screens */
+.promo-fixed.is-directory-hidden{display:none!important}
 </style>
 <!-- redeploy-trigger: 2026-09-29-1135 -->
 <meta property="og:image:alt" content="PEOPLEENT 기업행사 운영 현장">
 <meta name="twitter:image:alt" content="PEOPLEENT 기업행사 운영 현장">
 </head>
 <body>
-<div class="deck" id="deck">
+<main class="deck" id="deck" aria-label="PEOPLEENT 서비스와 회사 소개">
 
 <section class="slide" id="top">
   <div class="frame">
@@ -1617,7 +1620,7 @@ a{color:inherit}
   </div>
 </section>
 
-</div>
+</main>
 
 <div class="nav" id="nav"></div>
 <div class="arrows">
@@ -1661,6 +1664,8 @@ function go(i){
 }
 function sync(i){
   active=i;
+  const promo=document.querySelector(".promo-fixed");
+  if(promo) promo.classList.toggle("is-directory-hidden",slides[i]?.id==="event-types");
   dots.forEach((d,n)=>d.classList.toggle('on',n===i));
   progress.style.width=((i+1)/slides.length*100)+'%';
 }
