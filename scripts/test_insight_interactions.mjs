@@ -112,6 +112,80 @@ try {
  if(!shot?.pass)throw Error('Photo shot tracker failure '+JSON.stringify(shot));
  console.log('PASS 12-shot live capture tracker',JSON.stringify(shot));
 
+ // A/B location comparison: draft persists ONLY after explicit Save.
+ await open('/insight/event-venue-site-inspection/');
+ const venueSaved=await run(`(()=>{
+  const a=document.getElementById('venue-A-0');
+  const n=document.getElementById('venue-note-A-0');
+  const template=document.getElementById('guide-template');
+  a.value='확인 완료';a.dispatchEvent(new Event('change',{bubbles:true}));
+  n.value='=HYPERLINK("bad","link")';n.dispatchEvent(new Event('input',{bubbles:true}));
+  template.value+='\\nQA_VENUE_DRAFT';
+  document.querySelector('[data-guide-action="save"]').click();
+  const saved=JSON.parse(localStorage.getItem('peopleent:insight:venue:draft:v1')||'null');
+  return {pass:saved?.version===1&&saved.controls['venue-A-0']==='확인 완료'&&saved.controls['venue-note-A-0']===n.value&&saved.controls['guide-template'].includes('QA_VENUE_DRAFT')};
+ })()`);
+ if(!venueSaved?.pass)throw Error('Venue draft saving failed '+JSON.stringify(venueSaved));
+ await open('/insight/event-venue-site-inspection/');
+ const venueLoaded=await run(`(async()=>{
+  const a=document.getElementById('venue-A-0');
+  const n=document.getElementById('venue-note-A-0');
+  const status=document.querySelector('[data-guide-storage-status]');
+  const ok=a.value==='확인 완료'&&n.value.startsWith('=HYPERLINK')&&document.getElementById('guide-template').value.includes('QA_VENUE_DRAFT')&&status.textContent.includes('복원');
+  const oldCreate=URL.createObjectURL;
+  const oldClick=HTMLAnchorElement.prototype.click;
+  let blob,filename;
+  URL.createObjectURL=b=>{blob=b;return 'blob:test-venue'};
+  HTMLAnchorElement.prototype.click=function(){filename=this.download};
+  document.querySelector('[data-guide-action="csv"]').click();
+  const csv=blob?await blob.text():'';
+  URL.createObjectURL=oldCreate;HTMLAnchorElement.prototype.click=oldClick;
+  const csvOk=csv.startsWith('\uFEFF')&&csv.includes("'=HYPERLINK")&&filename.endsWith('.csv')&&csv.split('\r\n').filter(Boolean).length===9;
+  window.confirm=()=>true;
+  document.querySelector('[data-guide-action="clear"]').click();
+  const clear=localStorage.getItem('peopleent:insight:venue:draft:v1')===null&&a.value==='미확인'&&n.value===''&&!document.getElementById('guide-template').value.includes('QA_VENUE_DRAFT');
+  return {pass:ok&&csvOk&&clear,restored:ok,csv:csvOk,reset:clear};
+ })()`);
+ if(!venueLoaded?.pass)throw Error('Venue restore, CSV or clear failure '+JSON.stringify(venueLoaded));
+ console.log('PASS venue save-restore, escaped CSV and clear',JSON.stringify(venueLoaded));
+
+ await open('/insight/event-photo-video-shot-list/');
+ const shotSaved=await run(`(()=>{
+  const a=document.getElementById('shot-status-0');
+  const n=document.getElementById('shot-note-0');
+  a.value='확보';a.dispatchEvent(new Event('change',{bubbles:true}));
+  n.value='=1+2';n.dispatchEvent(new Event('input',{bubbles:true}));
+  const template=document.getElementById('guide-template');
+  template.value+='\\nQA_SHOT_DRAFT';
+  document.querySelector('[data-guide-action="save"]').click();
+  const saved=JSON.parse(localStorage.getItem('peopleent:insight:shot:draft:v1')||'null');
+  return {pass:saved?.version===1&&saved.controls['shot-status-0']==='확보'&&saved.controls['shot-note-0']==='=1+2'&&saved.controls['guide-template'].includes('QA_SHOT_DRAFT')};
+ })()`);
+ if(!shotSaved?.pass)throw Error('Shot draft saving failed '+JSON.stringify(shotSaved));
+ await open('/insight/event-photo-video-shot-list/');
+ const shotLoaded=await run(`(async()=>{
+  const a=document.getElementById('shot-status-0');
+  const n=document.getElementById('shot-note-0');
+  const status=document.querySelector('[data-guide-storage-status]');
+  const ok=a.value==='확보'&&n.value==='=1+2'&&document.getElementById('guide-template').value.includes('QA_SHOT_DRAFT')&&status.textContent.includes('복원');
+  const oldCreate=URL.createObjectURL;
+  const oldClick=HTMLAnchorElement.prototype.click;
+  let blob,filename;
+  URL.createObjectURL=b=>{blob=b;return 'blob:test-shot'};
+  HTMLAnchorElement.prototype.click=function(){filename=this.download};
+  document.querySelector('[data-guide-action="csv"]').click();
+  const csv=blob?await blob.text():'';
+  URL.createObjectURL=oldCreate;HTMLAnchorElement.prototype.click=oldClick;
+  const csvOk=csv.startsWith('\uFEFF')&&csv.includes("'=1+2")&&filename.endsWith('.csv')&&csv.split('\r\n').filter(Boolean).length===13;
+  window.confirm=()=>true;
+  document.querySelector('[data-guide-action="clear"]').click();
+  const clear=localStorage.getItem('peopleent:insight:shot:draft:v1')===null&&a.value==='미확인'&&n.value===''&&!document.getElementById('guide-template').value.includes('QA_SHOT_DRAFT');
+  return {pass:ok&&csvOk&&clear,restored:ok,csv:csvOk,reset:clear};
+ })()`);
+ if(!shotLoaded?.pass)throw Error('Shot restore, CSV or clear failure '+JSON.stringify(shotLoaded));
+ console.log('PASS shot save-restore, escaped CSV and clear',JSON.stringify(shotLoaded));
+
+
  console.log('PASS three critical existing-page interactions');
 } finally {
  if(socket)socket.close();
