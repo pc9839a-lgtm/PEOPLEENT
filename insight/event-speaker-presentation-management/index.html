@@ -50,18 +50,21 @@
 .faq details{padding:19px 0;border-bottom:1px solid #d8d0c6}.faq summary{cursor:pointer;font-weight:850;font-size:17px}.faq p{margin:10px 0 0;font-size:15px}
 .related{display:flex;flex-wrap:wrap;gap:8px;margin:22px 0}.related a{border:1px solid #d8d0c6;background:white;text-decoration:none;font-size:13px;padding:11px 13px;font-weight:800}
 @media(max-width:650px){.toolbox{padding:18px}.message-example{padding:18px}.toolbox [role=status]{display:block;margin:10px 0}}
+.message-example{border-left:3px solid #ff6a21}
+.toolbox textarea:focus-visible,.toolbox button:focus-visible,.faq summary:focus-visible{outline:3px solid #ff6a21;outline-offset:3px}
+@media print{header,.sticky,.closing,footer,.toc,.toolbox button{display:none!important}body{padding:0!important}.wrap{width:100%}.scroll{overflow:visible}article section{break-inside:avoid}}
 </style></head><body>
-<header><div class="wrap head"><a class="logo" href="/">PEOPLEENT</a><nav aria-label="메뉴"><a href="/insight/">실무 자료</a><a href="/corporate-event/">기업행사</a></nav></div></header>
+<header><div class="wrap head"><a class="logo" href="/">PEOPLEENT</a><nav class="menu" aria-label="메뉴"><a href="/insight/">실무 자료</a><a href="/corporate-event/">기업행사</a></nav></div></header>
 <main><article>
 <div class="hero"><div class="wrap">
 <div class="crumbs"><a href="/">PEOPLEENT</a> / <a href="/insight/">실무 자료</a> / 발표자·자료 운영</div>
-<div class="eyebrow">EVENT OPERATION / PRACTICAL GUIDE</div>
+<div class="label">EVENT OPERATION / PRACTICAL GUIDE</div>
 <h1>행사 연사·발표자료 제출 관리 체크리스트</h1><p class="lead">행사 당일의 가장 흔한 혼선은 ‘발표자료를 받았다’는 사실과 ‘무대에서 재생 가능한 최종본을 확보했다’는 사실을 혼동할 때 생깁니다. 연사 명단부터 파일 버전·룸 배정·기술 리허설까지 분리해 관리하는 방법입니다.</p>
-<div class="meta">PEOPLEENT · 2026.11.03 · 실무 활용 자료</div>
-<nav class="anchor-list" aria-label="페이지 목차"><a href="#roles">담당 구분</a><a href="#master">연사 기준표</a><a href="#files">파일·버전</a><a href="#rehearsal">기술 리허설</a><a href="#changes">변경 대응</a><a href="#template">요청·인계 양식</a><a href="#faq">FAQ</a></nav>
+<div class="date">PEOPLEENT · 2026.11.03 · 실무 활용 자료</div>
+<nav class="toc" aria-label="페이지 목차"><a href="#roles">담당 구분</a><a href="#master">연사 기준표</a><a href="#files">파일·버전</a><a href="#rehearsal">기술 리허설</a><a href="#changes">변경 대응</a><a href="#template">요청·인계 양식</a><a href="#faq">FAQ</a></nav>
 <div class="article-chips"><span>연사 정보 기준표</span><span>자료 제출·버전 관리</span><span>리허설</span><span>변경 승인</span></div>
 </div></div><div class="wrap">
-<div class="intro-summary"><strong>이 글의 활용 범위</strong><p>행사 운영 실무를 위한 참고 자료입니다. 계약이나 행사장별 조건, 주최 측 승인, 개인정보·저작권 관련 요구사항을 대신하지 않습니다. 제공된 양식은 복사해 사용할 수 있으며 자동 저장·서버 전송되지 않습니다.</p></div>
+<div class="intro"><strong>이 글의 활용 범위</strong><p>행사 운영 실무를 위한 참고 자료입니다. 계약이나 행사장별 조건, 주최 측 승인, 개인정보·저작권 관련 요구사항을 대신하지 않습니다. 제공된 양식은 복사해 사용할 수 있으며 자동 저장·서버 전송되지 않습니다.</p></div>
 <section id="roles"><h2>1. 연사 담당과 무대 기술 담당의 책임을 분리</h2><p>연사를 섭외한 조직, 학술 내용과 발표 제목을 승인하는 조직, 현장에서 발표 파일을 여는 담당자는 같지 않을 수 있습니다. 특히 학회·컨퍼런스에서는 주최 학회·사무국·PCO·행사 운영팀 간 승인 업무를 혼동하지 않도록 정리해야 합니다.</p>
 <div class="scroll"><table><thead><tr><th scope="col">업무</th><th scope="col">정보를 확정하는 주체(예시)</th><th scope="col">현장으로 전달할 자료</th></tr></thead><tbody><tr><th scope="row">발표 주제·섭외</th><td>주최 측 프로그램·학술 담당</td><td>초청·확정 명단, 세션 배정</td></tr><tr><th scope="row">연사 이름·소속·직함</th><td>연사 본인 확인 + 주최 측 승인</td><td>정확한 표기·발음·소개문 기준본</td></tr><tr><th scope="row">발표자료 접수</th><td>연사 연락 담당·사무국</td><td>접수 상태·파일 위치·마감 시점</td></tr><tr><th scope="row">파일 기술 검수</th><td>영상·PPT 오퍼레이터·음향 담당</td><td>실제 재생 결과·대체 파일·질문 목록</td></tr><tr><th scope="row">무대 등단·Q&A</th><td>세션 진행자·좌장·무대 PM</td><td>무대 동선·시간 신호·발표 순서</td></tr><tr><th scope="row">수정·배포 승인</th><td>주최 측 지정 승인자·저작권자</td><td>최종 파일·촬영·공개 가능 범위</td></tr></tbody></table></div>
 <p>발표 내용과 저자·기관 표기의 학술적 적정성은 운영팀이 임의로 판단하지 않습니다. 연사 섭외나 학술 심사가 운영사 계약 범위에 포함돼 있는지도 별도로 확인해야 합니다.</p></section><section id="master"><h2>2. 연사 정보는 하나의 기준표로 관리</h2><p>연자별 정보가 메신저·메일·프로그램북·현장 PPT 폴더에 흩어져 있으면 수정이 발생할 때 서로 다른 버전이 남습니다. 변경 승인을 받는 하나의 기준표를 정하고, 인쇄물·안내 화면·사회자 소개·촬영 파일 이름에 동일한 표기를 적용합니다.</p>
@@ -110,6 +113,6 @@ PPT 외 영상·음향·특수 글꼴 유무: [ ]
 </div></article></main>
 <section class="closing"><div class="wrap"><h2>행사 조건에 맞춰 운영 범위를 확인하세요.</h2><p>일정과 참가 규모, 장소, 프로그램·발표자 조건을 알려주시면 등록·진행·기술·제작·촬영에서 맡아야 할 일을 구분해 협의할 수 있습니다. 본문 예시는 PEOPLEENT의 특정 수행실적을 의미하지 않습니다.</p><a href="https://peopleent.com/contact" target="_blank" rel="noopener noreferrer">행사 운영 문의 →</a></div></section>
 <footer><div class="wrap">PEOPLEENT · <a href="/insight/">행사 실무 자료 더 보기</a></div></footer>
-<div class="pe-sticky-cta"><div><span>PEOPLEENT</span><strong>행사 운영 문의</strong></div><a href="https://peopleent.com/contact" target="_blank" rel="noopener noreferrer">상담하기 →</a></div>
+<div class="sticky"><div><span>PEOPLEENT</span><strong>행사 운영 문의</strong></div><a href="https://peopleent.com/contact" target="_blank" rel="noopener noreferrer">상담하기 →</a></div>
 <script>(function(){const field=document.getElementById("pe-guide-draft"),button=document.getElementById("pe-guide-copy"),status=document.getElementById("pe-guide-copy-status");if(!field||!button||!status)return;button.addEventListener("click",async()=>{try{if(!navigator.clipboard?.writeText)throw Error("no-clipboard");await navigator.clipboard.writeText(field.value);status.textContent="입력 내용이 복사되었습니다.";}catch(e){field.focus();field.select();status.textContent="내용을 선택했습니다. Ctrl+C 또는 복사 메뉴를 사용하세요.";}});})();</script>
 </body></html>
