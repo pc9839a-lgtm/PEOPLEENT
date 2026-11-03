@@ -13,7 +13,17 @@ export async function onRequest(context) {
   const response = await context.next();
   const url = new URL(context.request.url);
   const type = String(response.headers.get('content-type') || '').toLowerCase();
-  if (context.request.method !== 'GET' || !response.ok || url.hostname.toLowerCase() !== HOST || RESTRICTED_PATH.test(url.pathname) || !type.includes('text/html')) return response;
+  const hostname = url.hostname.toLowerCase();
+
+  // Preview/branch deployments must not compete with the canonical production host.
+  // The production custom domain continues to serve indexable HTML.
+  if (hostname !== HOST && response.ok && type.includes('text/html')) {
+    const headers = new Headers(response.headers);
+    headers.set('X-Robots-Tag', 'noindex, nofollow');
+    return new Response(response.body, { status: response.status, statusText: response.statusText, headers });
+  }
+
+  if (context.request.method !== 'GET' || !response.ok || RESTRICTED_PATH.test(url.pathname) || !type.includes('text/html')) return response;
 
   const html = await response.text();
   if (!/<\/head>/i.test(html) || html.includes(MARKER)) {

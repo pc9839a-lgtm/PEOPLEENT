@@ -1,8 +1,14 @@
-name: PEOPLEENT content SEO QA
+name: PEOPLEENT technical SEO and content QA
 on:
   pull_request:
     branches: [main]
     paths:
+      - 'index.html'
+      - '**/index.html'
+      - 'functions/_middleware.js'
+      - 'robots.txt'
+      - 'scripts/verify_site_seo.py'
+      - 'scripts/test_middleware_seo.mjs'
       - 'insight/**'
       - 'assets/insight-article.css'
       - 'sitemap.xml'
@@ -15,6 +21,12 @@ on:
   push:
     branches: [main]
     paths:
+      - 'index.html'
+      - '**/index.html'
+      - 'functions/_middleware.js'
+      - 'robots.txt'
+      - 'scripts/verify_site_seo.py'
+      - 'scripts/test_middleware_seo.mjs'
       - 'insight/**'
       - 'assets/insight-article.css'
       - 'sitemap.xml'
@@ -38,8 +50,12 @@ jobs:
         run: |
           node --check assets/insight-tools.js
           node --check scripts/test_insight_interactions.mjs
+      - name: Validate all published pages, canonicals, sitemap and links
+        run: python3 scripts/verify_site_seo.py
       - name: Validate sitemap, RSS, JSON-LD, canonical, article depth and internal links
         run: python3 scripts/verify_insight_release.py
+      - name: Test preview and production SEO response headers
+        run: node scripts/test_middleware_seo.mjs
       - name: Test actual insight page interactions in Chrome
         run: |
           CHROME_BIN="$(command -v google-chrome || command -v google-chrome-stable || command -v chromium)" node scripts/test_insight_interactions.mjs

@@ -1305,6 +1305,19 @@ a{color:inherit}
 
 /* Keep service directory cards unobstructed on narrow screens */
 .promo-fixed.is-directory-hidden{display:none!important}
+
+/* Technical SEO and accessibility: content must stay visible and scrollable without JS. */
+html,body{height:auto;min-height:100%;overflow-x:hidden;overflow-y:auto}
+.deck{width:100%;height:auto;overflow:visible;scroll-snap-type:none;scroll-behavior:auto;overscroll-behavior-y:auto;scrollbar-width:auto}
+.slide{height:auto;min-height:max(620px,100svh);overflow:visible;scroll-snap-align:none;scroll-snap-stop:normal}
+.frame{height:auto;min-height:max(620px,100svh)}
+.slide [data-reveal]{opacity:1;transform:none}
+.slide [data-line]::after{display:none}
+@media(max-width:900px){
+ .slide{min-height:100svh}
+ .frame{min-height:100svh}
+}
+
 </style>
 <!-- redeploy-trigger: 2026-09-29-1135 -->
 <meta property="og:image:alt" content="PEOPLEENT 기업행사 운영 현장">
@@ -1673,14 +1686,14 @@ function sync(i){
 const observer=new IntersectionObserver(entries=>{
   entries.forEach(entry=>{
     const i=slides.indexOf(entry.target);
-    if(entry.isIntersecting&&entry.intersectionRatio>=0.42){
+    if(entry.isIntersecting&&entry.intersectionRatio>=0.22){
       entry.target.classList.add('in-view');
       sync(i);
     }else if(entry.intersectionRatio<0.08){
       entry.target.classList.remove('in-view');
     }
   });
-},{root:deck,threshold:[0,.08,.42,.7]});
+},{root:null,threshold:[0,.08,.22,.42,.7]});
 
 slides.forEach(s=>observer.observe(s));
 slides[0].classList.add('in-view');
@@ -1689,11 +1702,13 @@ sync(0);
 document.getElementById('next').onclick=()=>go(active+1);
 document.getElementById('prev').onclick=()=>go(active-1);
 
+// Native page scrolling stays available. Only horizontal arrows advance slides
+// when no interactive control has keyboard focus.
 addEventListener('keydown',e=>{
-  if(['ArrowDown','ArrowRight','PageDown',' '].includes(e.key)){e.preventDefault();go(active+1)}
-  if(['ArrowUp','ArrowLeft','PageUp'].includes(e.key)){e.preventDefault();go(active-1)}
-  if(e.key==='Home'){e.preventDefault();go(0)}
-  if(e.key==='End'){e.preventDefault();go(slides.length-1)}
+  if(e.altKey||e.ctrlKey||e.metaKey||e.shiftKey||e.defaultPrevented)return;
+  if(e.target instanceof Element && e.target.closest('a,button,input,textarea,select,summary,[contenteditable="true"]'))return;
+  if(e.key==='ArrowRight'){e.preventDefault();go(active+1)}
+  if(e.key==='ArrowLeft'){e.preventDefault();go(active-1)}
 });
 
 if(matchMedia('(prefers-reduced-motion: reduce)').matches){
