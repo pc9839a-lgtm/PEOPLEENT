@@ -190,6 +190,31 @@ try {
  console.log('PASS shot save-restore, escaped CSV and clear',JSON.stringify(shotLoaded));
 
 
+
+ const newGuides=[
+  {route:'/insight/event-attendee-notice-message-templates/',heading:'기업행사 참가자 안내문·리마인드 문자 작성법',sections:['role','data','schedule','examples','change','template']},
+  {route:'/insight/event-speaker-presentation-management/',heading:'행사 연사·발표자료 제출 관리 체크리스트',sections:['roles','master','files','rehearsal','changes','template']}
+ ];
+ for(const guide of newGuides){
+  await open(guide.route);
+  const detail=await run(`(async()=>{
+   const area=document.getElementById('pe-guide-draft');
+   const button=document.getElementById('pe-guide-copy');
+   const status=document.getElementById('pe-guide-copy-status');
+   const h1=document.querySelector('h1');
+   const ids=${JSON.stringify(guide.sections)};
+   if(!area||!button||!status||!h1||!ids.every(id=>document.getElementById(id)))return {pass:false,why:'missing article controls or sections'};
+   const initial=area.value;
+   area.value=initial+' [TEST_EDIT]';
+   button.click();
+   await new Promise(resolve=>setTimeout(resolve,40));
+   const copied=status.textContent.includes('복사')||status.textContent.includes('선택');
+   return {pass:h1.textContent.trim()===${JSON.stringify(guide.heading)}&&initial.length>450&&area.value.endsWith('[TEST_EDIT]')&&copied&&document.querySelectorAll('#faq details').length===4,templateLength:initial.length,status:status.textContent,sections:ids.length};
+  })()`);
+  if(!detail?.pass)throw Error('New guide browser validation failed '+guide.route+' '+JSON.stringify(detail));
+  console.log('PASS new practical guide template and FAQ',guide.route,JSON.stringify(detail));
+ }
+
  console.log('PASS three critical existing-page interactions');
 } finally {
  if(socket)socket.close();
