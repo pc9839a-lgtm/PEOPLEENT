@@ -67,7 +67,7 @@ def main():
     check((ROOT/"assets/insight-article.css").exists(), "Article shared CSS absent")
     xml = ET.parse(ROOT/"sitemap.xml").getroot()
     sitemap = [node.text for node in xml.iter() if node.tag.endswith("}loc")]
-    check(len(sitemap) == 33 and len(set(sitemap)) == 31, "Sitemap must have 33 unique URLs")
+    check(len(sitemap) == 33 and len(set(sitemap)) == 33, "Sitemap must have 33 unique URLs")
     rss_root = ET.parse(ROOT/"rss.xml").getroot()
     rss_items = rss_root.findall("./channel/item")
     check(len(rss_items) == 25, "RSS must include 25 items")
