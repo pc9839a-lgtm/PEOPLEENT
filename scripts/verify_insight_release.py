@@ -67,19 +67,19 @@ def main():
     check((ROOT/"assets/insight-article.css").exists(), "Article shared CSS absent")
     xml = ET.parse(ROOT/"sitemap.xml").getroot()
     sitemap = [node.text for node in xml.iter() if node.tag.endswith("}loc")]
-    check(len(sitemap) == 31 and len(set(sitemap)) == 31, "Sitemap must have 31 unique URLs")
+    check(len(sitemap) == 33 and len(set(sitemap)) == 31, "Sitemap must have 33 unique URLs")
     rss_root = ET.parse(ROOT/"rss.xml").getroot()
     rss_items = rss_root.findall("./channel/item")
-    check(len(rss_items) == 23, "RSS must include 23 items")
+    check(len(rss_items) == 25, "RSS must include 25 items")
     rss_links = [x.findtext("link") for x in rss_items]
-    check(len(set(rss_links)) == 23, "RSS duplicate links")
+    check(len(set(rss_links)) == 25, "RSS duplicate links")
     hub_file = ROOT/"insight/index.html"
     hub = parse_html(hub_file)
     hub_links = [x for x in hub.hrefs if re.fullmatch(r"/insight/[^/]+/", x)]
-    check(len(hub_links) == 23 and len(set(hub_links)) == 23, "Hub must display 23 unique article cards")
+    check(len(hub_links) == 25 and len(set(hub_links)) == 23, "Hub must display 25 unique article cards")
     check(len(hub.lds) == 1, "Hub JSON-LD missing or duplicated")
     itemlist = next(x for x in hub.lds[0]["@graph"] if x["@type"] == "ItemList")
-    check(itemlist["numberOfItems"] == 23 and len(itemlist["itemListElement"]) == 23, "Hub ItemList count mismatch")
+    check(itemlist["numberOfItems"] == 25 and len(itemlist["itemListElement"]) == 25, "Hub ItemList count mismatch")
     for slug in NEW:
         path = ROOT/"insight"/slug/"index.html"
         check(path.exists(), f"New article missing: {slug}")
@@ -186,6 +186,36 @@ def main():
             target = target_path(href)
             if target:
                 check(target.exists(), f"New guide has broken internal link: {slug}: {href}")
+    # 2026-11-03: new event communications and presenter-file handling guides.
+    for slug in ("event-attendee-notice-message-templates", "event-speaker-presentation-management"):
+        article_path = ROOT / "insight" / slug / "index.html"
+        check(article_path.exists(), f"New publication missing: {slug}")
+        doc = article_path.read_text(encoding="utf-8")
+        parsed = parse_html(article_path)
+        article_url = f"{BASE}/insight/{slug}/"
+        check(parsed.canonicals == [article_url] and parsed.headings == ["h1"] and len(parsed.lds) == 1,
+              f"Publication canonical/H1/schema mismatch: {slug}")
+        structured = parsed.lds[0]["@graph"]
+        article = next(x for x in structured if x["@type"] == "Article")
+        check(article["datePublished"] == "2026-11-03" and article["mainEntityOfPage"]["@id"] == article_url,
+              f"Publication date or main URL mismatch: {slug}")
+        faq = next(x for x in structured if x["@type"] == "FAQPage")["mainEntity"]
+        visible_faq = re.findall(r"<details><summary>(.*?)</summary><p>(.*?)</p></details>", doc, flags=re.S)
+        check(len(faq) == len(visible_faq) == 4 and all(
+              x["name"] == visible_faq[i][0] and x["acceptedAnswer"]["text"] == visible_faq[i][1]
+              for i, x in enumerate(faq)), f"FAQ JSON-LD is not synchronized: {slug}")
+        for part in ("role","data","schedule","examples","change","template") if slug.startswith("event-attendee") else ("roles","master","files","rehearsal","changes","template"):
+            check(f'id="{part}"' in doc, f"Missing unique guide section {part}: {slug}")
+        clean = re.sub(r"<style[^>]*>.*?</style>|<script[^>]*>.*?</script>", "", doc, flags=re.I | re.S)
+        check(len(re.sub(r"<[^>]+>", "", clean)) > 6000,
+              f"Publication lacks substantial unique material: {slug}")
+        check('id="pe-guide-draft"' in doc and 'id="pe-guide-copy"' in doc,
+              f"Editable operational template missing: {slug}")
+        check(article_url in sitemap and article_url in rss_links and f"/insight/{slug}/" in hub_links,
+              f"Publication missing from hub, sitemap or RSS: {slug}")
+        for href in parsed.hrefs:
+            target = target_path(href)
+            if target: check(target.exists(), f"Broken related article link in {slug}: {href}")
     for href in hub_links:
         target = target_path(href)
         check(target is not None and target.exists(), f"Broken hub link: {href}")
