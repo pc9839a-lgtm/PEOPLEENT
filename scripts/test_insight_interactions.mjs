@@ -54,7 +54,7 @@ try {
   const filter=document.querySelector('[data-pe-topic="발주·견적"]');filter.click();
   const filtered=cards.filter(x=>!x.hidden).length;
   document.querySelector('[data-pe-topic="전체"]').click();
-  return {pass:matched>=1&&matched<cards.length&&filtered===6&&cards.every(x=>!x.hidden),searched:matched,filtered,all:cards.length};
+  return {pass:matched>=1&&matched<cards.length&&filtered===cards.filter(x=>x.dataset.topic==='발주·견적').length&&cards.every(x=>!x.hidden),searched:matched,filtered,all:cards.length};
  })()`);
  if(!hub?.pass)throw Error('Hub search/topic filter failure '+JSON.stringify(hub));
  console.log('PASS hub search/topic',JSON.stringify(hub));
