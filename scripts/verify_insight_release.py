@@ -76,7 +76,7 @@ def main():
     hub_file = ROOT/"insight/index.html"
     hub = parse_html(hub_file)
     hub_links = [x for x in hub.hrefs if re.fullmatch(r"/insight/[^/]+/", x)]
-    check(len(hub_links) == 25 and len(set(hub_links)) == 23, "Hub must display 25 unique article cards")
+    check(len(hub_links) == 25 and len(set(hub_links)) == 25, "Hub must display 25 unique article cards")
     check(len(hub.lds) == 1, "Hub JSON-LD missing or duplicated")
     itemlist = next(x for x in hub.lds[0]["@graph"] if x["@type"] == "ItemList")
     check(itemlist["numberOfItems"] == 25 and len(itemlist["itemListElement"]) == 25, "Hub ItemList count mismatch")
