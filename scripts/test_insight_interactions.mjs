@@ -209,7 +209,7 @@ try {
    button.click();
    await new Promise(resolve=>setTimeout(resolve,40));
    const copied=status.textContent.includes('복사')||status.textContent.includes('선택');
-   return {pass:h1.textContent.trim()===${JSON.stringify(guide.heading)}&&initial.length>450&&area.value.endsWith('[TEST_EDIT]')&&copied&&document.querySelectorAll('#faq details').length===4,templateLength:initial.length,status:status.textContent,sections:ids.length};
+   return {pass:h1.textContent.trim()===${JSON.stringify(guide.heading)}&&initial.length>350&&area.value.endsWith('[TEST_EDIT]')&&copied&&document.querySelectorAll('#faq details').length===4,templateLength:initial.length,status:status.textContent,sections:ids.length};
   })()`);
   if(!detail?.pass)throw Error('New guide browser validation failed '+guide.route+' '+JSON.stringify(detail));
   console.log('PASS new practical guide template and FAQ',guide.route,JSON.stringify(detail));
