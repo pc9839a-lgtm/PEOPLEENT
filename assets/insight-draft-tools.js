@@ -88,7 +88,8 @@
       return;
     }
     for (const el of controls) {
-      el.value = el.defaultValue;
+      if (el.tagName === 'SELECT') el.selectedIndex = 0;
+      else el.value = el.defaultValue;
     }
     refresh();
     announce('임시저장 기록과 현재 입력값을 초기화했습니다.');
@@ -146,9 +147,7 @@
   });
 
   controls.forEach(el => el.addEventListener(el.tagName === 'SELECT' ? 'change' : 'input', () => {
-    if (!message.textContent.includes('임시저장 기록과 현재 입력값을 초기화했습니다.')) {
-      announce('변경 내용은 아직 저장되지 않았습니다. 임시저장 또는 CSV 내보내기를 이용하세요.');
-    }
+    announce('변경 내용은 아직 저장되지 않았습니다. 임시저장 또는 CSV 내보내기를 이용하세요.');
   }));
 
   restore();
