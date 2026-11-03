@@ -1,0 +1,44 @@
+name: PEOPLEENT live search indexability audit
+
+on:
+  workflow_dispatch:
+  schedule:
+    # Daily 08:17 Asia/Seoul. GitHub Actions schedules can start later.
+    - cron: '17 23 * * *'
+  workflow_run:
+    workflows: ['PEOPLEENT technical SEO and content QA']
+    types: [completed]
+    branches: [main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: peopleent-live-indexability
+  cancel-in-progress: false
+
+jobs:
+  live-indexability:
+    if: ${{ github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Check out published main
+        uses: actions/checkout@v4
+        with:
+          ref: main
+      - name: Verify checker rules without network
+        run: python3 scripts/test_live_indexability.py
+      - name: Allow Cloudflare Pages a short window to finish main deployment
+        if: ${{ github.event_name == 'workflow_run' }}
+        run: sleep 25
+      - name: Audit 35 production URLs and Googlebot-like HTTP responses
+        run: python3 scripts/check_live_indexability.py --output=live-indexability-report.json
+      - name: Save live response report even when an issue is detected
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: peopleent-live-indexability-${{ github.run_id }}
+          path: live-indexability-report.json
+          if-no-files-found: warn
+          retention-days: 14
