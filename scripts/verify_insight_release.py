@@ -168,9 +168,8 @@ def main():
                   "Photo recovery guidance missing")
         check('data-guide-draft-key="peopleent:insight:' in doc and 'data-guide-storage-status' in doc,
               f"Explicit browser draft UI missing: {slug}")
-        check(doc.count('data-guide-action="save"') == 1 and
-              doc.count('data-guide-action="csv"') == 1 and
-              doc.count('data-guide-action="clear"') == 1,
+        check(all(len(re.findall(r'<button\b[^>]*data-guide-action="' + action + r'"', doc)) == 1
+                  for action in ("save", "csv", "clear")),
               f"Draft save/CSV/clear buttons missing: {slug}")
         check('<script src="/assets/insight-draft-tools.js" defer></script>' in doc,
               f"Shared draft tool not loaded: {slug}")
