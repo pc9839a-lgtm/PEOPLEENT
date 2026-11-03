@@ -75,7 +75,8 @@ def main():
     check(len(set(rss_links)) == 27, "RSS duplicate links")
     hub_file = ROOT/"insight/index.html"
     hub = parse_html(hub_file)
-    hub_links = [x for x in hub.hrefs if re.fullmatch(r"/insight/[^/]+/", x)]
+    hub_html = hub_file.read_text(encoding="utf-8")
+    hub_links = re.findall(r'<a class="card" data-topic="[^"]+" href="(/insight/[^/]+/)"', hub_html)
     check(len(hub_links) == 27 and len(set(hub_links)) == 27, "Hub must display 27 unique article cards")
     check(len(hub.lds) == 1, "Hub JSON-LD missing or duplicated")
     itemlist = next(x for x in hub.lds[0]["@graph"] if x["@type"] == "ItemList")
@@ -245,6 +246,48 @@ def main():
         for href in parsed.hrefs:
             target = target_path(href)
             if target: check(target.exists(), f"Broken guide link {slug}: {href}")
+    # Curated navigation remains static and crawlable without JavaScript.
+    routes_path = ROOT / "scripts/insight-topic-journeys.json"
+    check(routes_path.exists(), "Topic journey source of truth missing")
+    routes_data = json.loads(routes_path.read_text(encoding="utf-8"))
+    routes = routes_data["articles"]
+    listed_slugs = {url.split("/")[-2] for url in hub_links}
+    check(routes_data["version"] == 1 and set(routes) == listed_slugs and len(routes) == 27,
+          "Topic journeys must cover exactly the 27 published article cards")
+    check((ROOT / "assets/insight-next-steps.css").is_file(), "Topic journey CSS missing")
+    check(hub_html.count('class="pe-pathway"') == 4,
+          "Hub must expose four static reading stages")
+    check(hub_html.count('class="pe-pathway-links"') == 4 and
+          hub_html.count('class="pe-pathway-service"') == 4,
+          "Hub reading stage links/services missing")
+    section_pattern = re.compile(r'<section class="pe-next-step"[^>]*>(.*?)</section>', re.S)
+    for slug, route in routes.items():
+        article_path = ROOT / "insight" / slug / "index.html"
+        html = article_path.read_text(encoding="utf-8")
+        matches = section_pattern.findall(html)
+        check(len(matches) == 1, f"Exactly one contextual next-step section required: {slug}")
+        check('href="/assets/insight-next-steps.css"' in html,
+              f"Contextual navigation stylesheet missing: {slug}")
+        check(len(route["articles"]) == 2 and len(set(route["articles"])) == 2
+              and slug not in route["articles"], f"Invalid next-step recommendations: {slug}")
+        links = re.findall(r'<a href="(/insight/[^"]+/)"', matches[0])
+        expect = [f"/insight/{name}/" for name in route["articles"]]
+        check(links == expect, f"Contextual reading links out of sync: {slug}")
+        check(all(name in listed_slugs for name in route["articles"]),
+              f"Contextual recommendation points to unpublished guide: {slug}")
+        check(route["service"] in
+              ("/corporate-event/", "/public-event/", "/conference/", "/seminar/",
+               "/academic-event/", "/live-streaming/"),
+              f"Unexpected service target: {slug}")
+        check(f'href="{route["service"]}"' in matches[0],
+              f"Relevant service link missing: {slug}")
+        check((ROOT / route["service"].strip("/") / "index.html").is_file(),
+              f"Service destination missing: {slug}")
+        check(html.count('id="pe-next-heading"') == 1,
+              f"Contextual heading repeated: {slug}")
+        check(f"{BASE}/insight/{slug}/" in sitemap,
+              f"Topic guide absent from sitemap: {slug}")
+    print(f"PASS: {len(routes)} contextual article journeys and four hub reading stages")
     for href in hub_links:
         target = target_path(href)
         check(target is not None and target.exists(), f"Broken hub link: {href}")

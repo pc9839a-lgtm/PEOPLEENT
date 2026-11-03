@@ -1,0 +1,194 @@
+{
+  "version": 1,
+  "articles": {
+    "event-satisfaction-survey-questions": {
+      "articles": [
+        "event-results-reporting",
+        "event-attendee-notice-message-templates"
+      ],
+      "service": "/corporate-event/"
+    },
+    "event-vendor-purchase-order-change-control": {
+      "articles": [
+        "event-rfp-writing",
+        "event-results-reporting"
+      ],
+      "service": "/corporate-event/"
+    },
+    "event-attendee-notice-message-templates": {
+      "articles": [
+        "conference-registration-operations",
+        "event-staffing-plan"
+      ],
+      "service": "/conference/"
+    },
+    "event-speaker-presentation-management": {
+      "articles": [
+        "event-cue-sheet-guide",
+        "conference-operation-checklist"
+      ],
+      "service": "/conference/"
+    },
+    "event-venue-site-inspection": {
+      "articles": [
+        "event-safety-response-plan",
+        "event-rfp-writing"
+      ],
+      "service": "/corporate-event/"
+    },
+    "event-photo-video-shot-list": {
+      "articles": [
+        "event-photography-cost",
+        "event-results-reporting"
+      ],
+      "service": "/corporate-event/"
+    },
+    "event-agency-cost": {
+      "articles": [
+        "event-rfp-writing",
+        "event-vendor-purchase-order-change-control"
+      ],
+      "service": "/corporate-event/"
+    },
+    "event-agency-checklist": {
+      "articles": [
+        "event-agency-cost",
+        "event-rfp-writing"
+      ],
+      "service": "/corporate-event/"
+    },
+    "event-rfp-writing": {
+      "articles": [
+        "event-vendor-purchase-order-change-control",
+        "event-agency-cost"
+      ],
+      "service": "/corporate-event/"
+    },
+    "public-event-practical-guide": {
+      "articles": [
+        "event-rfp-writing",
+        "event-results-reporting"
+      ],
+      "service": "/public-event/"
+    },
+    "live-streaming-cost": {
+      "articles": [
+        "hybrid-conference-operations",
+        "event-photo-video-shot-list"
+      ],
+      "service": "/live-streaming/"
+    },
+    "event-photography-cost": {
+      "articles": [
+        "event-photo-video-shot-list",
+        "event-results-reporting"
+      ],
+      "service": "/corporate-event/"
+    },
+    "conference-operation-checklist": {
+      "articles": [
+        "conference-registration-operations",
+        "event-speaker-presentation-management"
+      ],
+      "service": "/conference/"
+    },
+    "event-staffing-plan": {
+      "articles": [
+        "event-cue-sheet-guide",
+        "conference-registration-operations"
+      ],
+      "service": "/corporate-event/"
+    },
+    "conference-registration-operations": {
+      "articles": [
+        "event-attendee-notice-message-templates",
+        "event-staffing-plan"
+      ],
+      "service": "/conference/"
+    },
+    "event-cue-sheet-guide": {
+      "articles": [
+        "event-speaker-presentation-management",
+        "event-photo-video-shot-list"
+      ],
+      "service": "/conference/"
+    },
+    "vip-event-protocol": {
+      "articles": [
+        "corporate-awards-ceremony",
+        "event-staffing-plan"
+      ],
+      "service": "/corporate-event/"
+    },
+    "event-safety-response-plan": {
+      "articles": [
+        "event-venue-site-inspection",
+        "event-staffing-plan"
+      ],
+      "service": "/corporate-event/"
+    },
+    "corporate-seminar-checklist": {
+      "articles": [
+        "event-speaker-presentation-management",
+        "event-attendee-notice-message-templates"
+      ],
+      "service": "/seminar/"
+    },
+    "corporate-workshop-planning": {
+      "articles": [
+        "event-staffing-plan",
+        "event-venue-site-inspection"
+      ],
+      "service": "/corporate-event/"
+    },
+    "corporate-townhall-meeting": {
+      "articles": [
+        "hybrid-conference-operations",
+        "event-attendee-notice-message-templates"
+      ],
+      "service": "/corporate-event/"
+    },
+    "hybrid-conference-operations": {
+      "articles": [
+        "live-streaming-cost",
+        "conference-operation-checklist"
+      ],
+      "service": "/live-streaming/"
+    },
+    "pco-vs-event-agency": {
+      "articles": [
+        "conference-operation-checklist",
+        "conference-registration-operations"
+      ],
+      "service": "/academic-event/"
+    },
+    "event-print-production-guide": {
+      "articles": [
+        "event-vendor-purchase-order-change-control",
+        "event-results-reporting"
+      ],
+      "service": "/corporate-event/"
+    },
+    "event-results-reporting": {
+      "articles": [
+        "event-satisfaction-survey-questions",
+        "event-vendor-purchase-order-change-control"
+      ],
+      "service": "/corporate-event/"
+    },
+    "corporate-awards-ceremony": {
+      "articles": [
+        "vip-event-protocol",
+        "event-photo-video-shot-list"
+      ],
+      "service": "/corporate-event/"
+    },
+    "exhibition-booth-operations": {
+      "articles": [
+        "event-print-production-guide",
+        "event-staffing-plan"
+      ],
+      "service": "/public-event/"
+    }
+  }
+}

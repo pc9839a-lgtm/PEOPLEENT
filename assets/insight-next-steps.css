@@ -1,0 +1,16 @@
+/* Stage-linked reading journeys for PEOPLEENT editorial pages. */
+.pe-next-step{width:min(920px,calc(100% - 40px));margin:48px auto 60px;padding:0 0 22px;border-top:2px solid #171717;border-bottom:1px solid #d8d0c6;color:#191817;box-sizing:border-box;font-family:Pretendard,"Noto Sans KR",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+.pe-next-step *{box-sizing:border-box}
+.pe-next-step .pe-next-kicker{display:block;margin:22px 0 8px;font-size:11px;font-weight:900;letter-spacing:.12em;color:#d4501d}
+.pe-next-step h2{font-size:clamp(23px,3vw,31px);line-height:1.3;letter-spacing:-.04em;margin:0 0 9px;color:#191817}
+.pe-next-step p{margin:0;color:#655d54;font-size:14px;line-height:1.8}
+.pe-next-links{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:20px}
+.pe-next-links a{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:17px 18px;border:1px solid #dcd5c9;background:#fff;color:#191817!important;text-decoration:none!important;font-size:14px;font-weight:800;line-height:1.55}
+.pe-next-links a:hover{border-color:#ff6a21}
+.pe-next-links a span{color:#d4501d;font-weight:900}
+.pe-next-service{display:flex;justify-content:space-between;align-items:center;gap:16px;margin-top:13px;padding:15px 0;border-top:1px solid #e0dacf}
+.pe-next-service small{font-size:12px;color:#686059}
+.pe-next-service a{color:#a53b11!important;font-weight:900;font-size:14px;text-decoration:underline!important;text-underline-offset:4px}
+.pe-next-step a:focus-visible{outline:3px solid #ff6a21;outline-offset:3px}
+@media(max-width:690px){.pe-next-step{width:calc(100% - 28px);margin:34px auto 45px}.pe-next-links{grid-template-columns:1fr}.pe-next-links a{padding:15px}.pe-next-service{align-items:flex-start;flex-direction:column;gap:7px}}
+@media print{.pe-next-step{break-inside:avoid}.pe-next-service{display:none}}

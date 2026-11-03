@@ -282,6 +282,27 @@ body{padding-bottom:112px!important}
 .pe-empty{display:none;padding:28px 0 45px;font-size:15px;color:#68615b}
 .pe-empty:not([hidden]){display:block}
 @media(max-width:640px){.pe-find-guides{padding-bottom:20px}.pe-topic-buttons button{padding:8px 12px;font-size:12px}.pe-find-guides input{font-size:16px}}
+
+/* Editorial wayfinding: relevant reading paths before the full searchable archive. */
+.pe-pathways{margin-bottom:36px;border-top:2px solid #171717;border-bottom:1px solid var(--line)}
+.pe-pathways-heading{display:flex;align-items:end;justify-content:space-between;gap:26px;padding:29px 0 25px}
+.pe-pathways-heading small{display:block;color:var(--accent);font-size:11px;font-weight:900;letter-spacing:.12em;margin-bottom:9px}
+.pe-pathways-heading h2{font-size:clamp(25px,3.2vw,35px);letter-spacing:-.045em;line-height:1.25;margin:0}
+.pe-pathways-heading>p{max-width:370px;margin:0;color:#635d56;font-size:14px;line-height:1.7}
+.pe-pathway{display:grid;grid-template-columns:minmax(220px,1.35fr) minmax(290px,2fr) minmax(132px,0.9fr);align-items:center;gap:22px;border-top:1px solid #e2ddd4;padding:24px 0}
+.pe-pathway-summary{display:flex;align-items:flex-start;gap:15px}
+.pe-pathway-summary>span{font-size:12px;color:var(--accent);font-weight:900;padding-top:5px}
+.pe-pathway-summary h3{font-size:18px;letter-spacing:-.035em;margin:0 0 7px;line-height:1.4}
+.pe-pathway-summary p{font-size:12px;color:#6d6760;line-height:1.65;margin:0}
+.pe-pathway-links{display:flex;flex-wrap:wrap;gap:8px}
+.pe-pathway-links a{border:1px solid #dcd6cb;background:#fff;padding:9px 12px;font-size:12px;font-weight:800;text-decoration:none;line-height:1.45}
+.pe-pathway-links a:hover{border-color:var(--accent)}
+.pe-pathway-service{font-size:12px;font-weight:900;text-decoration:underline;text-underline-offset:4px;justify-self:end;text-align:right}
+.pe-pathway-service span{color:var(--accent)}
+.pe-pathways a:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+@media(max-width:850px){.pe-pathway{grid-template-columns:1fr;gap:12px}.pe-pathway-service{justify-self:start;text-align:left}.pe-pathways-heading{align-items:start;flex-direction:column;gap:10px}}
+@media(max-width:640px){.pe-pathways{margin-bottom:27px}.pe-pathways-heading{padding:24px 0}.pe-pathway{padding:20px 0}.pe-pathway-links a{padding:10px 12px}.pe-pathways-heading>p{font-size:13px}}
+
 </style><meta name="twitter:image:alt" content="PEOPLEENT 기업행사 운영 현장">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="ko_KR">
@@ -295,6 +316,30 @@ body{padding-bottom:112px!important}
 <link rel="alternate" type="application/rss+xml" title="PEOPLEENT 행사 운영 인사이트" href="https://peopleent.pagero.kr/rss.xml">
 </head><body><header><div class="wrap head"><a class="logo" href="/">PEOPLEENT</a><a class="home" href="/">HOME</a></div></header>
 <main><div class="wrap intro"><small>PEOPLEENT INSIGHT</small><h1>기업행사 실무 자료</h1><p>대행사 제안요청서부터 큐시트·등록·VIP 의전·안전관리·결과보고까지, 행사 담당자가 준비할 때 확인할 실무 자료 27개입니다.</p></div>
+<section class="wrap pe-pathways" aria-labelledby="pe-pathways-title">
+<div class="pe-pathways-heading"><div><small>BY WORK STAGE</small><h2 id="pe-pathways-title">행사 준비, 지금 필요한 단계부터</h2></div><p>27개 실무 자료 중 자주 함께 필요한 순서만 묶었습니다. 단계별 링크를 읽고 필요한 서비스 범위를 확인하세요.</p></div>
+<div class="pe-pathway-list">
+<div class="pe-pathway">
+<div class="pe-pathway-summary"><span>01</span><div><h3>행사 기획·업체 선정</h3><p>행사 과업을 정하고 장소와 업체 조건을 비교할 때</p></div></div>
+<div class="pe-pathway-links" aria-label="행사 기획·업체 선정 실무 자료"><a href="/insight/event-agency-checklist/">대행업체 선정</a><a href="/insight/event-rfp-writing/">RFP 작성</a><a href="/insight/event-venue-site-inspection/">장소 실사</a></div>
+<a class="pe-pathway-service" href="/corporate-event/">기업행사 서비스 보기 <span aria-hidden="true">→</span></a>
+</div>
+<div class="pe-pathway">
+<div class="pe-pathway-summary"><span>02</span><div><h3>참가자·현장 운영</h3><p>체크인, 스태프 분장과 참가 안내를 준비할 때</p></div></div>
+<div class="pe-pathway-links" aria-label="참가자·현장 운영 실무 자료"><a href="/insight/event-staffing-plan/">운영 인력 분장</a><a href="/insight/conference-registration-operations/">등록·체크인</a><a href="/insight/event-attendee-notice-message-templates/">안내문 작성</a></div>
+<a class="pe-pathway-service" href="/conference/">컨퍼런스 운영 보기 <span aria-hidden="true">→</span></a>
+</div>
+<div class="pe-pathway">
+<div class="pe-pathway-summary"><span>03</span><div><h3>발표·촬영·기술 준비</h3><p>연사 자료, 큐시트와 촬영 누락을 줄여야 할 때</p></div></div>
+<div class="pe-pathway-links" aria-label="발표·촬영·기술 준비 실무 자료"><a href="/insight/event-speaker-presentation-management/">연사·PPT 관리</a><a href="/insight/event-cue-sheet-guide/">진행 큐시트</a><a href="/insight/event-photo-video-shot-list/">촬영 샷리스트</a></div>
+<a class="pe-pathway-service" href="/live-streaming/">송출·영상 운영 보기 <span aria-hidden="true">→</span></a>
+</div>
+<div class="pe-pathway">
+<div class="pe-pathway-summary"><span>04</span><div><h3>결과보고·정산</h3><p>설문 결과와 납품·추가 비용을 정리할 때</p></div></div>
+<div class="pe-pathway-links" aria-label="결과보고·정산 실무 자료"><a href="/insight/event-satisfaction-survey-questions/">만족도 설문</a><a href="/insight/event-results-reporting/">결과보고서</a><a href="/insight/event-vendor-purchase-order-change-control/">발주·변경관리</a></div>
+<a class="pe-pathway-service" href="/corporate-event/">기업행사 운영 보기 <span aria-hidden="true">→</span></a>
+</div>
+</div></section>
 <div class="wrap pe-find-guides" aria-label="필요한 행사 실무 자료 찾기">
  <label for="pe-guide-search">준비 중인 업무로 찾기</label>
  <input id="pe-guide-search" type="search" placeholder="예: 견적, 큐시트, VIP, 송출, 안전" autocomplete="off" aria-controls="pe-articles" />
