@@ -140,7 +140,7 @@ try {
   document.querySelector('[data-guide-action="csv"]').click();
   const csv=blob?await blob.text():'';
   URL.createObjectURL=oldCreate;HTMLAnchorElement.prototype.click=oldClick;
-  const csvOk=csv.startsWith('\uFEFF')&&csv.includes("'=HYPERLINK")&&filename.endsWith('.csv')&&csv.split('\r\n').filter(Boolean).length===9;
+  const csvOk=csv.charCodeAt(0)===0xFEFF&&csv.includes("'=HYPERLINK")&&filename.endsWith('.csv')&&csv.split(String.fromCharCode(13,10)).filter(Boolean).length===9;
   window.confirm=()=>true;
   document.querySelector('[data-guide-action="clear"]').click();
   const clear=localStorage.getItem('peopleent:insight:venue:draft:v1')===null&&a.value==='미확인'&&n.value===''&&!document.getElementById('guide-template').value.includes('QA_VENUE_DRAFT');
@@ -176,7 +176,7 @@ try {
   document.querySelector('[data-guide-action="csv"]').click();
   const csv=blob?await blob.text():'';
   URL.createObjectURL=oldCreate;HTMLAnchorElement.prototype.click=oldClick;
-  const csvOk=csv.startsWith('\uFEFF')&&csv.includes("'=1+2")&&filename.endsWith('.csv')&&csv.split('\r\n').filter(Boolean).length===13;
+  const csvOk=csv.charCodeAt(0)===0xFEFF&&csv.includes("'=1+2")&&filename.endsWith('.csv')&&csv.split(String.fromCharCode(13,10)).filter(Boolean).length===13;
   window.confirm=()=>true;
   document.querySelector('[data-guide-action="clear"]').click();
   const clear=localStorage.getItem('peopleent:insight:shot:draft:v1')===null&&a.value==='미확인'&&n.value===''&&!document.getElementById('guide-template').value.includes('QA_SHOT_DRAFT');
