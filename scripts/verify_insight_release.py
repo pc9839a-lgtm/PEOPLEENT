@@ -67,19 +67,19 @@ def main():
     check((ROOT/"assets/insight-article.css").exists(), "Article shared CSS absent")
     xml = ET.parse(ROOT/"sitemap.xml").getroot()
     sitemap = [node.text for node in xml.iter() if node.tag.endswith("}loc")]
-    check(len(sitemap) == 33 and len(set(sitemap)) == 33, "Sitemap must have 33 unique URLs")
+    check(len(sitemap) == 35 and len(set(sitemap)) == 35, "Sitemap must have 35 unique URLs")
     rss_root = ET.parse(ROOT/"rss.xml").getroot()
     rss_items = rss_root.findall("./channel/item")
-    check(len(rss_items) == 25, "RSS must include 25 items")
+    check(len(rss_items) == 27, "RSS must include 27 items")
     rss_links = [x.findtext("link") for x in rss_items]
-    check(len(set(rss_links)) == 25, "RSS duplicate links")
+    check(len(set(rss_links)) == 27, "RSS duplicate links")
     hub_file = ROOT/"insight/index.html"
     hub = parse_html(hub_file)
     hub_links = [x for x in hub.hrefs if re.fullmatch(r"/insight/[^/]+/", x)]
-    check(len(hub_links) == 25 and len(set(hub_links)) == 25, "Hub must display 25 unique article cards")
+    check(len(hub_links) == 27 and len(set(hub_links)) == 27, "Hub must display 27 unique article cards")
     check(len(hub.lds) == 1, "Hub JSON-LD missing or duplicated")
     itemlist = next(x for x in hub.lds[0]["@graph"] if x["@type"] == "ItemList")
-    check(itemlist["numberOfItems"] == 25 and len(itemlist["itemListElement"]) == 25, "Hub ItemList count mismatch")
+    check(itemlist["numberOfItems"] == 27 and len(itemlist["itemListElement"]) == 27, "Hub ItemList count mismatch")
     for slug in NEW:
         path = ROOT/"insight"/slug/"index.html"
         check(path.exists(), f"New article missing: {slug}")
@@ -216,6 +216,35 @@ def main():
         for href in parsed.hrefs:
             target = target_path(href)
             if target: check(target.exists(), f"Broken related article link in {slug}: {href}")
+    # November 3 operational guides: survey quality and vendor change-control.
+    for slug in ("event-satisfaction-survey-questions", "event-vendor-purchase-order-change-control"):
+        page = ROOT / "insight" / slug / "index.html"
+        check(page.exists(), f"Missing new guide: {slug}")
+        doc = page.read_text(encoding="utf-8")
+        parsed = parse_html(page)
+        url = f"{BASE}/insight/{slug}/"
+        check(parsed.canonicals == [url] and parsed.headings == ["h1"] and len(parsed.lds) == 1,
+              f"Guide canonical/H1/schema mismatch: {slug}")
+        graph = parsed.lds[0]["@graph"]
+        article = next(x for x in graph if x["@type"] == "Article")
+        check(article["datePublished"] == "2026-11-03" and article["mainEntityOfPage"]["@id"] == url,
+              f"Guide date/main URL mismatch: {slug}")
+        faq = next(x for x in graph if x["@type"] == "FAQPage")["mainEntity"]
+        visible = re.findall(r"<details><summary>(.*?)</summary><p>(.*?)</p></details>", doc, flags=re.S)
+        check(len(faq) == len(visible) == 4 and all(
+              f["name"] == visible[i][0] and f["acceptedAnswer"]["text"] == visible[i][1]
+              for i, f in enumerate(faq)), f"FAQ visible/schema mismatch: {slug}")
+        required = ("purpose","questions","open","timing","analysis","template") if slug == "event-satisfaction-survey-questions" else ("scope","fields","workflow","handoff","reconcile","template")
+        check(all(f'id="{part}"' in doc for part in required), f"Guide chapters missing: {slug}")
+        clean = re.sub(r"<style[^>]*>.*?</style>|<script[^>]*>.*?</script>", "", doc, flags=re.I | re.S)
+        check(len(re.sub(r"<[^>]+>", "", clean)) > 5000, f"Guide lacks editorial depth: {slug}")
+        check('id="pe-guide-draft"' in doc and 'id="pe-guide-copy"' in doc,
+              f"Guide lacks editable-copy template: {slug}")
+        check(url in sitemap and url in rss_links and f"/insight/{slug}/" in hub_links,
+              f"Guide missing in hub/sitemap/RSS: {slug}")
+        for href in parsed.hrefs:
+            target = target_path(href)
+            if target: check(target.exists(), f"Broken guide link {slug}: {href}")
     for href in hub_links:
         target = target_path(href)
         check(target is not None and target.exists(), f"Broken hub link: {href}")
