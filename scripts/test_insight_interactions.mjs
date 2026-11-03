@@ -241,6 +241,54 @@ try {
   console.log('PASS new guide content + copy controls',route,JSON.stringify(result));
  }
 
+
+ await open('/insight/');
+ const readingStages=await run(`(()=>{
+   const rows=[...document.querySelectorAll('.pe-pathway')];
+   const readLinks=[...document.querySelectorAll('.pe-pathway-links a')];
+   const serviceLinks=[...document.querySelectorAll('.pe-pathway-service')];
+   const routes=readLinks.concat(serviceLinks);
+   return {pass:rows.length===4&&readLinks.length===12&&serviceLinks.length===4&&
+     routes.every(link=>link.pathname.startsWith('/')&&!link.pathname.includes('#'))&&
+     document.querySelectorAll('#pe-articles .card').length===27,
+     rows:rows.length,resources:readLinks.length,services:serviceLinks.length};
+ })()`);
+ if(!readingStages?.pass)throw Error('Insight four-stage path failure '+JSON.stringify(readingStages));
+ console.log('PASS 4 reading stages + 12 articles + 4 services',JSON.stringify(readingStages));
+ await send('Emulation.setDeviceMetricsOverride',{width:390,height:844,deviceScaleFactor:1,mobile:true});
+ await open('/insight/');
+ const mobileStage=await run(`(()=>{
+   const row=document.querySelector('.pe-pathway');
+   const columns=row?getComputedStyle(row).gridTemplateColumns.split(' ').filter(Boolean):[];
+   const within=document.querySelector('.pe-pathways').getBoundingClientRect();
+   return {pass:columns.length===1&&within.left>=0&&within.right<=innerWidth+2,
+     columns:columns.length,left:within.left,right:within.right,width:innerWidth};
+ })()`);
+ if(!mobileStage?.pass)throw Error('Mobile reading stages failure '+JSON.stringify(mobileStage));
+ console.log('PASS mobile one-column editorial journey',JSON.stringify(mobileStage));
+ await send('Emulation.clearDeviceMetricsOverride');
+ const nextSamples=[
+   ['/insight/event-agency-cost/','/corporate-event/',['/insight/event-rfp-writing/','/insight/event-vendor-purchase-order-change-control/']],
+   ['/insight/event-speaker-presentation-management/','/conference/',['/insight/event-cue-sheet-guide/','/insight/conference-operation-checklist/']],
+   ['/insight/pco-vs-event-agency/','/academic-event/',['/insight/conference-operation-checklist/','/insight/conference-registration-operations/']],
+   ['/insight/exhibition-booth-operations/','/public-event/',['/insight/event-print-production-guide/','/insight/event-staffing-plan/']]
+ ];
+ for(const [route,service,recs] of nextSamples){
+   await open(route);
+   const detail=await run(`(()=>{
+     const section=document.querySelector('article .pe-next-step');
+     const articles=section?[...section.querySelectorAll('.pe-next-links a')].map(x=>x.pathname):[];
+     const target=section?.querySelector('.pe-next-service a')?.pathname;
+     const border=section?getComputedStyle(section).borderTopStyle:'';
+     return {articleLinks:articles,service:target,border,stepCount:document.querySelectorAll('.pe-next-step').length};
+   })()`);
+   if(detail?.stepCount!==1||detail.service!==service||
+       JSON.stringify(detail.articleLinks)!==JSON.stringify(recs)||detail.border!=='solid'){
+     throw Error('Article next-step and service mismatch '+route+' '+JSON.stringify(detail));
+   }
+   console.log('PASS contextual guide/service navigation',route,JSON.stringify(detail));
+ }
+
  console.log('PASS three critical existing-page interactions');
 } finally {
  if(socket)socket.close();
