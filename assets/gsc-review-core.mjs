@@ -74,6 +74,9 @@ function headerInfo(rows, requiredMetrics = false) {
     const url = names.findIndex(x => URL_HEADERS.has(x));
     const clicks = names.findIndex(x => CLICK_HEADERS.has(x));
     const impressions = names.findIndex(x => IMP_HEADERS.has(x));
+    // Page-indexing reason totals may use 'Pages' to mean a NUMBER, not a URL.
+    if (!requiredMetrics && url >= 0 && names[url] === 'pages'
+        && names.some(x => ['reason','사유','원인'].includes(x))) continue;
     if (url < 0 || (requiredMetrics && (clicks < 0 || impressions < 0))) continue;
     return {
       i, url, clicks, impressions,
