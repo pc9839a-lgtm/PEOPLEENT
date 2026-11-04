@@ -5,6 +5,7 @@ const GA4_ID = 'G-501Z526B8H';
 const MARKER = 'data-pagero-portfolio-ga4';
 const ENGAGEMENT_MARKER = 'data-peopleent-engagement';
 const RESTRICTED_PATH = /^\/(?:api|admin|dashboard|account)(?:\/|$)/i;
+const PRIVATE_REVIEW_PATH = '/tools/gsc-review.html';
 
 function tag() {
   return `<script ${MARKER}>(function(){if(location.hostname!=='${HOST}')return;window.dataLayer=window.dataLayer||[];window.gtag=window.gtag||function(){window.dataLayer.push(arguments)};window.gtag('js',new Date());window.gtag('config','${GA4_ID}');var s=document.createElement('script');s.async=true;s.src='https://www.googletagmanager.com/gtag/js?id=${GA4_ID}';document.head.appendChild(s)})();</script><script defer ${ENGAGEMENT_MARKER} src="/assets/peopleent-engagement.js"></script>`;
@@ -19,6 +20,15 @@ export async function onRequest(context) {
   // Preview/branch deployments must not compete with the canonical production host.
   // The production custom domain continues to serve indexable HTML.
   if (hostname !== HOST && response.ok && type.includes('text/html')) {
+    const headers = new Headers(response.headers);
+    headers.set('X-Robots-Tag', 'noindex, nofollow');
+    return new Response(response.body, { status: response.status, statusText: response.statusText, headers });
+  }
+
+  // The private CSV workspace is crawl-excluded and has no GA4 scripts.
+  // Input files are handled solely in the browser; neither analytics nor
+  // server-side handlers are attached to this page.
+  if (url.pathname === PRIVATE_REVIEW_PATH && response.ok && type.includes('text/html')) {
     const headers = new Headers(response.headers);
     headers.set('X-Robots-Tag', 'noindex, nofollow');
     return new Response(response.body, { status: response.status, statusText: response.statusText, headers });
