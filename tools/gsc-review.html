@@ -1,0 +1,100 @@
+<!doctype html><html lang="ko"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Google Search Console 색인 상태 대조 도구 | PEOPLEENT</title>
+<meta name="robots" content="noindex,nofollow,noarchive"><meta name="referrer" content="no-referrer">
+<meta name="description" content="Search Console에서 직접 내보낸 색인 예시·검색 성과 CSV와 PEOPLEENT 35개 사이트맵 URL을 브라우저에서 대조합니다.">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<style>
+:root{--ink:#1d1b19;--muted:#706b65;--orange:#e85e20;--line:#ddd6c9;--paper:#f7f5f0;--white:#fff}
+*{box-sizing:border-box}body{margin:0;color:var(--ink);background:var(--paper);font-family:Pretendard,"Noto Sans KR",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;line-height:1.65;word-break:keep-all}
+a{color:inherit}header{border-bottom:1px solid var(--line);background:var(--white)}.wrap{width:min(1110px,calc(100% - 36px));margin:auto}.head{display:flex;align-items:center;justify-content:space-between;min-height:67px}.brand{font-size:15px;font-weight:950;letter-spacing:.14em;text-decoration:none}.back{font-size:13px;text-decoration:underline;text-underline-offset:4px}
+.hero{padding:62px 0 34px}.kicker{font-size:12px;color:#b64b1b;font-weight:900;letter-spacing:.12em}.hero h1{font-size:clamp(32px,5vw,56px);line-height:1.18;letter-spacing:-.055em;margin:13px 0 15px}.hero p{max-width:820px;color:#57524b;font-size:17px;margin:0}
+.notice{margin-top:21px;padding:14px 18px;border-left:3px solid var(--orange);background:#fff;font-size:13px;color:#5c5148}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:11px;margin-top:23px}.step{border-top:2px solid var(--ink);padding:14px 4px}.step b{font-size:14px}.step p{font-size:13px;color:var(--muted);margin:5px 0}
+.panels{display:grid;grid-template-columns:1fr 1fr;gap:15px;margin:22px 0}.panel{background:white;border:1px solid var(--line);padding:25px}
+.panel h2{font-size:20px;letter-spacing:-.03em;margin:0 0 9px}.panel>p{font-size:13px;color:var(--muted);margin:0 0 18px;min-height:42px}
+label{display:block;margin:12px 0 6px;font-size:13px;font-weight:800}
+select,input[type=file]{display:block;width:100%;border:1px solid #cfc5b8;border-radius:0;background:#fff;color:var(--ink);padding:11px;font:inherit;font-size:14px}
+input[type=file]{min-height:48px}
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:44px;border:0;border-radius:0;padding:11px 18px;font:inherit;font-size:13px;font-weight:900;cursor:pointer;background:var(--ink);color:white;margin-top:16px}
+.btn.secondary{background:white;color:#1d1b19;border:1px solid #bcb1a3;margin-top:0}.btn.orange{background:var(--orange);color:#18100b}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+:focus-visible{outline:3px solid var(--orange);outline-offset:3px}
+.import-note{color:#736a60;font-size:12px;margin-top:11px}
+#notice-status{min-height:30px;padding:7px 0;font-size:13px;font-weight:800;color:#76471f}
+#notice-status[data-level=error]{color:#a12c1b}
+#notice-status[data-level=success]{color:#236037}
+.stats{display:grid;grid-template-columns:repeat(5,1fr);gap:1px;background:var(--line);border:1px solid var(--line);margin:18px 0 27px}
+.stat{background:white;padding:16px 12px}.stat small{display:block;font-size:12px;color:#6b645a}.stat strong{font-size:29px;font-variant-numeric:tabular-nums;letter-spacing:-.04em}
+.headline{display:flex;align-items:center;justify-content:space-between;gap:16px;margin:36px 0 12px}.headline h2{font-size:25px;margin:0;letter-spacing:-.04em}
+.filterbar{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:0 0 12px}.filterbar label{margin:0}.filterbar select{width:260px;min-height:45px}
+.report-wrap{overflow:auto;border:1px solid var(--line);background:white;margin-bottom:24px}table{width:100%;border-collapse:collapse;min-width:870px;font-size:13px}
+th{text-align:left;background:#eeebe5;color:#4d4842;font-weight:900;padding:15px 14px;white-space:nowrap;border-bottom:1px solid var(--line)}
+td{padding:14px;border-bottom:1px solid #ece8e0;vertical-align:top}tr:last-child td{border-bottom:0}td.url{overflow-wrap:anywhere;max-width:310px}td.url a{font-weight:800;text-decoration:underline;text-underline-offset:3px}
+td.status{font-weight:800;min-width:148px}td.action{color:#625a51;min-width:205px}
+.numeric{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+footer{padding:25px 0 45px;color:var(--muted);font-size:12px;border-top:1px solid var(--line)}
+details{border:1px solid var(--line);background:#fff;margin:12px 0 35px;padding:19px 21px}summary{font-weight:900;cursor:pointer}details p,details li{color:#5d5851;font-size:14px}details ul{padding-left:20px}
+@media(max-width:800px){.steps{grid-template-columns:1fr;gap:0}.step{border-top:1px solid var(--line);padding:12px 0}.panels{grid-template-columns:1fr}.stats{grid-template-columns:repeat(2,1fr)}.stat:last-child{grid-column:1 / -1}.headline{align-items:flex-start;flex-direction:column}.hero{padding-top:39px}.filterbar label{width:100%}.filterbar select{width:100%}}
+@media(max-width:480px){.panel{padding:19px}.hero p{font-size:15px}.stat strong{font-size:25px}.wrap{width:calc(100% - 28px)}}
+@media print{header,.panels,.filterbar,details,.btn{display:none!important}body{background:white}.report-wrap{overflow:visible}table{min-width:0}}
+</style></head><body>
+<header><div class="wrap head"><a class="brand" href="/">PEOPLEENT</a><a class="back" href="/insight/">실무 자료로 돌아가기</a></div></header>
+<main class="wrap">
+<section class="hero" aria-labelledby="title"><div class="kicker">SEARCH CONSOLE / INDEX REVIEW</div>
+<h1 id="title">Google 색인 상태를<br>URL별로 대조하기</h1>
+<p>Search Console에서 직접 내보낸 자료와 사이트맵의 공개 URL 35개를 비교합니다. 제외 사유와 검색 성과를 구분하고 우선 확인할 페이지를 정리할 수 있습니다.</p>
+<div class="notice"><strong>개인 브라우저에서만 분석:</strong> CSV 파일·검색 데이터는 서버로 업로드하거나 저장하지 않습니다. 이 페이지의 방문 분석도 비활성화되어 있습니다. <strong>업로드하지 않은 URL의 색인 상태는 미확인</strong>으로 표시합니다.</div>
+<div class="steps" aria-label="사용 순서">
+<div class="step"><b>01. Google Search Console에서 내보내기</b><p>페이지 색인 사유별 예시 URL 목록을 CSV로 준비합니다.</p></div>
+<div class="step"><b>02. 상태별 CSV를 추가</b><p>상태를 고르고 파일을 가져옵니다. 파일별로 반복할 수 있습니다.</p></div>
+<div class="step"><b>03. 검색 성과와 대조·내보내기</b><p>선택적으로 검색 실적의 '페이지' CSV를 가져와 결과표를 저장합니다.</p></div>
+</div></section>
+<div class="panels">
+<section class="panel" aria-labelledby="index-heading"><h2 id="index-heading">1. 색인 상태별 URL 목록</h2>
+<p>Search Console '페이지 색인'에서 개별 사유를 열어 <strong>예시 URL 목록</strong>을 내보낸 CSV를 사용합니다. 전체 원인·페이지 수 집계표는 URL별 분류에 사용할 수 없습니다.</p>
+<label for="index-status">가져올 파일의 색인 상태</label>
+<select id="index-status">
+<option value="crawled">크롤링됨 - 현재 색인 생성 안 됨</option>
+<option value="discovered">발견됨 - 현재 색인 생성 안 됨</option>
+<option value="alternate">중복·다른 canonical 선택</option>
+<option value="blocked">차단·오류·기타 색인 제외</option>
+<option value="indexed">색인됨(해당 목록에 명확히 표시된 경우에만)</option>
+</select>
+<label for="index-file">예시 URL CSV</label><input id="index-file" type="file" accept=".csv,text/csv">
+<button class="btn" type="button" id="index-import">상태별 URL 가져오기</button>
+<div class="import-note">같은 URL이 다른 상태 파일에 있으면 임의로 덮어쓰지 않고 '상태 충돌'로 표시합니다.</div>
+</section>
+<section class="panel" aria-labelledby="performance-heading"><h2 id="performance-heading">2. 검색 실적 (선택)</h2>
+<p>Search Console '검색 실적 → 페이지'의 클릭·노출 CSV를 가져옵니다. <strong>검색 실적에 없는 URL을 미색인으로 판정하지 않습니다.</strong></p>
+<label for="performance-file">검색 실적 페이지 CSV</label>
+<input id="performance-file" type="file" accept=".csv,text/csv">
+<button class="btn" type="button" id="performance-import">검색 실적 가져오기</button>
+<div class="import-note">두 번째 파일을 가져오면 이전 검색 실적은 대체됩니다. 중복·기간 겹침으로 합계가 부풀지 않도록 합니다.</div>
+</section></div>
+<div id="notice-status" role="status" aria-live="polite">사이트맵을 불러오는 중입니다.</div>
+<section aria-labelledby="report-heading">
+<div class="headline"><h2 id="report-heading">사이트맵 URL 분석 결과</h2>
+<button class="btn orange" id="export-button" type="button" disabled>결과 CSV 내보내기</button></div>
+<div class="stats">
+<div class="stat"><small>사이트맵 대상</small><strong id="stat-total">—</strong></div>
+<div class="stat"><small>색인됨으로 가져옴</small><strong id="stat-indexed">0</strong></div>
+<div class="stat"><small>색인 제외·차단</small><strong id="stat-excluded">0</strong></div>
+<div class="stat"><small>색인 상태 미확인</small><strong id="stat-unknown">—</strong></div>
+<div class="stat"><small>검색 성과 자료 있음</small><strong id="stat-performance">0</strong></div>
+</div>
+<div class="filterbar"><label for="report-filter">결과 필터</label><select id="report-filter">
+<option value="all">전체 URL</option><option value="excluded">색인 제외·차단</option><option value="conflict">상태 충돌</option><option value="unknown">미확인</option><option value="indexed">색인됨</option>
+</select><button class="btn secondary" type="button" id="clear-button">가져온 자료 초기화</button></div>
+<div class="report-wrap"><table><thead><tr><th scope="col">페이지</th><th scope="col">가져온 색인 상태</th><th scope="col" class="numeric">클릭</th><th scope="col" class="numeric">노출</th><th scope="col">우선 확인할 작업</th></tr></thead><tbody id="report-body"><tr><td colspan="5">사이트맵을 불러오는 중입니다.</td></tr></tbody></table></div>
+<p class="import-note">검색 클릭·노출의 '—'은 해당 자료가 없다는 뜻입니다. 0이나 미색인 상태를 의미하지 않습니다. 파일 업로드 없이 보이는 기본 목록은 모두 색인 상태 미확인입니다.</p>
+</section>
+<details><summary>어떤 CSV를 가져와야 하나요?</summary>
+<p>Search Console의 페이지 색인 보고서에서 특정 제외 사유를 선택하고, 하단의 예시 URL 목록을 CSV로 내보낼 수 있다면 해당 파일을 가져오세요. 내보내기 메뉴와 열 이름은 계정·언어에 따라 다를 수 있습니다.</p>
+<ul><li>예시 URL이 없는 '이유별 총 페이지 수' 파일은 개별 페이지의 색인 상태를 알려주지 않습니다.</li>
+<li>검색 실적 CSV는 페이지별 클릭·노출을 알 수 있지만, 노출이 없는 페이지를 자동으로 색인 제외로 분류하면 안 됩니다.</li>
+<li>예시 URL은 Search Console 화면의 전체 URL을 모두 포함하지 않을 수 있습니다. 누락된 URL은 '미확인'입니다.</li>
+<li>상태 충돌은 수집 날짜 또는 Google 선택 canonical이 다른 경우일 수 있으므로 최신 URL 검사 결과로 다시 확인하세요.</li></ul>
+</details></main>
+<footer><div class="wrap">PEOPLEENT · URL 분석 결과는 사용자 브라우저에서만 처리됩니다. Google의 실제 색인 여부는 Search Console 원본 자료에서 확인해야 합니다.</div></footer>
+<script type="module" src="/assets/gsc-review-ui.mjs"></script></body></html>

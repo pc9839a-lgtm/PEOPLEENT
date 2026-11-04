@@ -289,7 +289,46 @@ try {
    console.log('PASS contextual guide/service navigation',route,JSON.stringify(detail));
  }
 
- console.log('PASS three critical existing-page interactions');
+ await open('/tools/gsc-review.html');
+ const review=await run(`(async()=>{
+   const ready=()=>document.getElementById('stat-total')?.textContent==='35'
+     &&document.querySelectorAll('#report-body tr').length===35;
+   for(let i=0;i<18&&!ready();i++)await new Promise(done=>setTimeout(done,100));
+   if(!ready())return {pass:false,reason:'Sitemap not loaded',body:document.getElementById('notice-status')?.textContent};
+   const URL1='https://peopleent.pagero.kr/insight/event-agency-cost/';
+   const URL2='https://peopleent.pagero.kr/insight/event-rfp-writing/';
+   const nl=String.fromCharCode(10);
+   const input=document.getElementById('index-file');
+   const setFile=(node,csv)=>{const data=new DataTransfer();data.items.add(new File([csv],'example.csv',{type:'text/csv'}));node.files=data.files;};
+   setFile(input,['URL',URL1,URL2].join(nl));
+   document.getElementById('index-status').value='crawled';
+   document.getElementById('index-import').click();
+   await new Promise(done=>setTimeout(done,150));
+   const imported=document.getElementById('stat-excluded').textContent==='2'&&document.getElementById('stat-unknown').textContent==='33';
+   const perf=document.getElementById('performance-file');
+   setFile(perf,['Top pages,Clicks,Impressions',URL1+',2,14',URL2+',0,3'].join(nl));
+   document.getElementById('performance-import').click();
+   await new Promise(done=>setTimeout(done,150));
+   const perfLoaded=document.getElementById('stat-performance').textContent==='2';
+   setFile(input,['URL',URL1].join(nl));
+   document.getElementById('index-status').value='indexed';
+   document.getElementById('index-import').click();
+   await new Promise(done=>setTimeout(done,150));
+   const filter=document.getElementById('report-filter');
+   filter.value='conflict';filter.dispatchEvent(new Event('change',{bubbles:true}));
+   const conflict=document.querySelectorAll('#report-body tr').length===1&&
+     document.getElementById('report-body').textContent.includes('자료 간 상태 충돌');
+   filter.value='all';filter.dispatchEvent(new Event('change',{bubbles:true}));
+   window.confirm=()=>true;document.getElementById('clear-button').click();
+   const reset=document.getElementById('stat-unknown').textContent==='35'&&
+     document.getElementById('stat-performance').textContent==='0';
+   return {pass:imported&&perfLoaded&&conflict&&reset&&
+      document.querySelector('meta[name=robots]')?.content.includes('noindex'),
+      imported,perfLoaded,conflict,reset};
+ })()`);
+ if(!review?.pass)throw Error('Local GSC CSV tool browser check failed '+JSON.stringify(review));
+ console.log('PASS GSC CSV workspace: import, conflict, performance, filter, reset',JSON.stringify(review));
+  console.log('PASS three critical existing-page interactions');
 } finally {
  if(socket)socket.close();
  chrome.kill('SIGKILL');server.kill('SIGKILL');

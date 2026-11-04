@@ -10,6 +10,10 @@ on:
       - 'scripts/verify_site_seo.py'
       - 'scripts/check_live_indexability.py'
       - 'scripts/test_live_indexability.py'
+      - 'tools/gsc-review.html'
+      - 'assets/gsc-review-core.mjs'
+      - 'assets/gsc-review-ui.mjs'
+      - 'scripts/test_gsc_review.mjs'
       - '.github/workflows/live-indexability.yml'
       - 'scripts/test_middleware_seo.mjs'
       - 'assets/peopleent-engagement.js'
@@ -35,6 +39,10 @@ on:
       - 'scripts/verify_site_seo.py'
       - 'scripts/check_live_indexability.py'
       - 'scripts/test_live_indexability.py'
+      - 'tools/gsc-review.html'
+      - 'assets/gsc-review-core.mjs'
+      - 'assets/gsc-review-ui.mjs'
+      - 'scripts/test_gsc_review.mjs'
       - '.github/workflows/live-indexability.yml'
       - 'scripts/test_middleware_seo.mjs'
       - 'assets/peopleent-engagement.js'
@@ -66,10 +74,15 @@ jobs:
           node --check assets/peopleent-engagement.js
           node --check scripts/test_engagement_events.mjs
           node --check scripts/test_insight_interactions.mjs
+          node --check assets/gsc-review-core.mjs
+          node --check assets/gsc-review-ui.mjs
+          node --check scripts/test_gsc_review.mjs
       - name: Validate all published pages, canonicals, sitemap and links
         run: python3 scripts/verify_site_seo.py
       - name: Test deployed-indexability checker without external traffic
         run: python3 scripts/test_live_indexability.py
+      - name: Test Search Console CSV import and status reporting
+        run: node scripts/test_gsc_review.mjs
       - name: Validate sitemap, RSS, JSON-LD, canonical, article depth and internal links
         run: python3 scripts/verify_insight_release.py
       - name: Test preview and production SEO response headers
