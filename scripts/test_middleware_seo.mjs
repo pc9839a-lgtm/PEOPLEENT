@@ -27,6 +27,16 @@ const previewHead=await run('12345.peopleent.pages.dev','/','HEAD');
 assert.equal(previewHead.headers.get('x-robots-tag'),'noindex, nofollow');
 const css=await run('12345.peopleent.pages.dev','/assets/site.css','GET','text/css');
 assert.equal(css.headers.has('x-robots-tag'),false,'Assets should not gain an HTML noindex header');
+const privateTool=await run('peopleent.pagero.kr','/tools/gsc-review.html');
+assert.equal(privateTool.status,200);
+assert.equal(privateTool.headers.get('x-robots-tag'),'noindex, nofollow',
+  'GSC CSV workspace must never be indexed');
+assert.ok(!privateTool.body.includes('data-pagero-portfolio-ga4'),
+  'Private GSC CSV tool must not load GA4');
+assert.ok(!privateTool.body.includes('data-peopleent-engagement'),
+  'Private CSV tool must not send engagement events');
+const privateToolHead=await run('peopleent.pagero.kr','/tools/gsc-review.html','HEAD');
+assert.equal(privateToolHead.headers.get('x-robots-tag'),'noindex, nofollow');
 const blocked=await run('peopleent.pagero.kr','/admin/');
 assert.ok(!blocked.body.includes('data-pagero-portfolio-ga4'),'Restricted paths should not get tracking');
 assert.ok(!blocked.body.includes('data-peopleent-engagement'),'Restricted paths should not get engagement tracking');
